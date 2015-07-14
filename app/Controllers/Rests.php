@@ -166,5 +166,12 @@ ajax.post = function(url, data, callback, sync) {
       View::renderTemplate('footer', $data);
   }
 
+  public function search($keyword)
+  {
+    $data['title'] = 'חיפוש';
+    $data['results'] = $this->_model->search_dishes($keyword);
 
+    View::renderTemplate('header', $data);
+    View::renderTemplate('footer', $data);
+  }
 }

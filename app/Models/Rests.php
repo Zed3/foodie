@@ -29,6 +29,10 @@ class Rests extends \Core\Model {
     return $this->db->insert("dishes",$data);
   }
 
+  public function search_dishes($keyword) {
+    return $this->db->select('SELECT * FROM dishes WHERE dish_title LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
+  }
+
   public function parse_from_tenbis(){
   }
 }
