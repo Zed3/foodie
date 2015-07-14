@@ -40,64 +40,6 @@ class Rests extends Controller {
       }
     }
 
-    ?>
-<script>
-var ajax = {};
-ajax.x = function() {
-    if (typeof XMLHttpRequest !== 'undefined') {
-        return new XMLHttpRequest();
-    }
-    var versions = [
-        "MSXML2.XmlHttp.6.0",
-        "MSXML2.XmlHttp.5.0",
-        "MSXML2.XmlHttp.4.0",
-        "MSXML2.XmlHttp.3.0",
-        "MSXML2.XmlHttp.2.0",
-        "Microsoft.XmlHttp"
-    ];
-
-    var xhr;
-    for(var i = 0; i < versions.length; i++) {
-        try {
-            xhr = new ActiveXObject(versions[i]);
-            break;
-        } catch (e) {
-        }
-    }
-    return xhr;
-};
-
-ajax.send = function(url, callback, method, data, sync) {
-    var x = ajax.x();
-    x.open(method, url, sync);
-    x.onreadystatechange = function() {
-        if (x.readyState == 4) {
-            callback(x.responseText)
-        }
-    };
-    if (method == 'POST') {
-        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    }
-    x.send(data)
-};
-
-ajax.get = function(url, data, callback, sync) {
-    var query = [];
-    for (var key in data) {
-        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
-    }
-    ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, sync)
-};
-
-ajax.post = function(url, data, callback, sync) {
-    var query = [];
-    for (var key in data) {
-        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
-    }
-    ajax.send(url, callback, 'POST', query.join('&'), sync)
-};
-</script>
-    <?php
 // foreach($data['rests'] as $row){
 //   //$this->_model->get_dishes();
 //   //echo "Working on $row->rest_name<br/>";
@@ -173,5 +115,170 @@ ajax.post = function(url, data, callback, sync) {
 
     View::renderTemplate('header', $data);
     View::renderTemplate('footer', $data);
+  }
+  public function parse_all() {    
+    ?>
+<script>
+var ajax = {};
+ajax.x = function() {
+    if (typeof XMLHttpRequest !== 'undefined') {
+        return new XMLHttpRequest();
+    }
+    var versions = [
+        "MSXML2.XmlHttp.6.0",
+        "MSXML2.XmlHttp.5.0",
+        "MSXML2.XmlHttp.4.0",
+        "MSXML2.XmlHttp.3.0",
+        "MSXML2.XmlHttp.2.0",
+        "Microsoft.XmlHttp"
+    ];
+
+    var xhr;
+    for(var i = 0; i < versions.length; i++) {
+        try {
+            xhr = new ActiveXObject(versions[i]);
+            break;
+        } catch (e) {
+        }
+    }
+    return xhr;
+};
+
+ajax.send = function(url, callback, method, data, sync) {
+    var x = ajax.x();
+    x.open(method, url, sync);
+    x.onreadystatechange = function() {
+        if (x.readyState == 4) {
+            callback(x.responseText)
+        }
+    };
+    if (method == 'POST') {
+        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+    x.send(data)
+};
+
+ajax.get = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, sync)
+};
+
+ajax.post = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url, callback, 'POST', query.join('&'), sync)
+};
+</script><script>
+var ajax = {};
+ajax.x = function() {
+    if (typeof XMLHttpRequest !== 'undefined') {
+        return new XMLHttpRequest();
+    }
+    var versions = [
+        "MSXML2.XmlHttp.6.0",
+        "MSXML2.XmlHttp.5.0",
+        "MSXML2.XmlHttp.4.0",
+        "MSXML2.XmlHttp.3.0",
+        "MSXML2.XmlHttp.2.0",
+        "Microsoft.XmlHttp"
+    ];
+
+    var xhr;
+    for(var i = 0; i < versions.length; i++) {
+        try {
+            xhr = new ActiveXObject(versions[i]);
+            break;
+        } catch (e) {
+        }
+    }
+    return xhr;
+};
+
+ajax.send = function(url, callback, method, data, sync) {
+    var x = ajax.x();
+    x.open(method, url, sync);
+    x.onreadystatechange = function() {
+        if (x.readyState == 4) {
+            callback(x.responseText)
+        }
+    };
+    if (method == 'POST') {
+        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+    x.send(data)
+};
+
+ajax.get = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, sync)
+};
+
+ajax.post = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url, callback, 'POST', query.join('&'), sync)
+};
+</script>
+    <?php
+    $data['rests'] = $this->_model->get_restaurants();
+    foreach($data['rests'] as $row){
+      $url = DIR . "rests/$row->rest_id";
+      echo "<script>";
+      echo "ajax.get('$url', {}, function() {});";
+      echo "</script>";
+    }
+  }
+
+  public function parse($rest_id) {
+     $data['dishes'] = $this->_model->get_dishes($rest_id);
+      if (empty($data['dishes'])) {
+        libxml_use_internal_errors(true);
+        $url = "https://www.10bis.co.il/Restaurants/Menu/Delivery/$rest_id";
+        $content = Curl::get($url);
+        @$doc = new \DOMDocument();
+        @$doc->loadHTML($content);
+        @$xml = simplexml_import_dom($doc); // just to make xpath more simple
+        @$dishes = $xml->xpath("//div[@data-dishid]");
+
+        foreach ($dishes as $dish) {
+          @$dish_id = $dish['data-dishid'];
+          @$dish_title = $dish->div[1]->div->p ?: $dish->div->div->p;
+          @$dish_price = $dish->div[1]->div[1] ?: $dish->div->div[1];
+          @$dish_price = floatval(str_replace('₪', '', $dish_price));
+          @$dish_image = $dish->div['style']; //TODO: parse this :/
+          @$dish_desc = $dish['title'];
+          @$dish_image = str_replace(array('background: url(', ') no-repeat center;'), '', $dish_image);
+          if (!$dish_price) continue;
+          $dish_data = array(
+            'dish_id' => $dish_id,
+            'rest_id' => $rest_id,
+            'dish_price' => $dish_price,
+            'dish_image' => $dish_image ?: '',
+            'dish_title' => $dish_title ?: '',
+            'dish_desc' => $dish_desc ?: ''
+          );
+
+          $this->_model->add_dish($dish_data);
+
+            echo "<div class='dish'>";
+            echo "<img class='img-thumbnail dish_image' src='$dish_image' />";
+            echo "<div class='dish_details'>";
+            echo "<h3>$dish_title</h3>";
+            echo "<p>$dish_desc</p>";
+            echo "<div>$dish_price</div>";
+            echo "</div>";
+            echo "</div>";
+        }    
+      }
   }
 }

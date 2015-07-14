@@ -63,6 +63,10 @@ use Helpers\Hooks;
 //define routes
 Router::any('rest/(:num)', 'Controllers\Rests@rest');
 Router::any('rests/(:num)', 'Controllers\Rests@rest');
+
+Router::any('dishes/parse/(:num)', 'Controllers\Rests@parse');
+Router::any('dishes/parse_all', 'Controllers\Rests@parse_all');
+
 Router::any('search', 'Controllers\Rests@search');
 Router::any('search/(:any)', 'Controllers\Rests@search');
 Router::any('rests', 'Controllers\Rests@index');

@@ -11,8 +11,7 @@ use Core\Language;
 <?php
   if ($data['dishes']) {
     foreach($data['dishes'] as $row){
-      setlocale(LC_MONETARY,"he_IL.UTF-8");
-      $dish_price = money_format("%.2n", $row->dish_price);
+      $dish_price = number_format($row->dish_price,2);
       echo "<div class='row'>";
       echo "<div class='col-md-9'>";
       echo "<h3>$row->dish_title</h3>";
