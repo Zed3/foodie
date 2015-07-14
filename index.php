@@ -61,8 +61,10 @@ use Core\Router;
 use Helpers\Hooks;
 
 //define routes
+Router::any('rest/(:num)', 'Controllers\Rests@rest');
+Router::any('rests/(:num)', 'Controllers\Rests@rest');
+Router::any('rests', 'Controllers\Rests@index');
 Router::any('', 'Controllers\Welcome@index');
-Router::any('subpage', 'Controllers\Welcome@subPage');
 
 //module routes
 $hooks = Hooks::get();
@@ -76,5 +78,3 @@ Router::$fallback = false;
 
 //execute matched routes
 Router::dispatch();
-
-$db = \Helpers\Database::get();

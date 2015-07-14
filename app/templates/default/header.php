@@ -23,6 +23,8 @@ $hooks = Hooks::get();
 	<?php
 	Assets::css(array(
 		'//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css',
+		'//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css',
+		'//blueimp.github.io/Gallery/css/blueimp-gallery.min.css',
 		Url::templatePath() . 'css/style.css',
 	));
 

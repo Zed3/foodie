@@ -1,1 +1,20 @@
 /* Your styles here */
+  * {
+    text-align: right;
+    direction: rtl;
+  }
+
+  .dish {
+     margin: 20px auto;
+     height: 200px;
+     width: 200px;
+  }
+  .dish_details {
+    float: right;
+    margin-right: 20px;
+    text-align: right;
+  }
+  .dish_image {
+    width: 200px;
+    float: right;
+  }
