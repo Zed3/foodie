@@ -290,4 +290,77 @@ ajax.post = function(url, data, callback, sync) {
         }    
       }
   }
+
+  public function ping() {
+      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
+      $info = Curl::get($url);
+      $data['restaurants'] = json_decode($info);
+/*
+stdClass Object
+(
+    [RestaurantId] => 17160
+    [RestaurantName] => ×¤×™×¦×” ×”×ª×—× ×”
+    [RestaurantAddress] => ×ž× ×—× ×‘×’×™×Ÿ 116 ×ª×œ ××‘×™×‘
+    [RestaurantCityName] => ×ª×œ ××‘×™×‘
+    [RestaurantLogoUrl] => https://d25t2285lxl5rf.cloudfront.net/images/shops/17160.png
+    [RestaurantPhone] => 03-5090620
+    [RestaurantCuisineList] => ××™×˜×œ×§×™, ×¡×œ×˜×™×/×¡× ×“×•×•×™×¦`×™×, ×¤×™×¦×¨×™×•×ª
+    [NumOfReviews] => 5
+    [ReviewsRank] => 9
+    [distanceFromUser] => 0 ×ž×˜×¨×™×
+    [distanceFromUserInMeters] => 0
+    [IsOpenForDelivery] => 1
+    [IsOpenForPickup] => 
+    [MinimumOrder] => â‚ª100.00
+    [MinimumPriceForOrder] => 100
+    [DeliveryPrice] => ×—×™× ×
+    [DeliveryPriceForOrder] => 0
+    [IsKosher] => 
+    [RestaurantKosher] => 
+    [DeliveryRemarks] => 
+    [ResGeoLocation_lon] => 34.7892544
+    [ResGeoLocation_lat] => 32.0708773
+    [HappyHourDiscount] => 
+    [HappyHourDiscountPercent] => 0
+    [deliveryChargeValueType] => 0
+    [HappyHourDiscountValidityString] => ×ª×§×£ ×¢×“ 00:00
+    [StartOrderURL] => 
+    [ActivityHours] => 09:00 - 22:45
+    [PickupActivityHours] => 00:00 - 00:00
+    [DeliveryTime] => 
+    [IsHappyHourActive] => 
+    [IsPromotionActive] => 1
+    [CompanyFlag] => 
+    [IsOverPoolMin] => 
+    [PoolSum] => â‚ª 0.00
+    [PoolSumNumber] => 0
+    [DeliveryEndTime] => 22:45
+    [IsTerminalActive] => 
+    [IsActiveForDelivery] => 1
+    [IsActiveForPickup] => 1
+    [Bookmarked] => 
+    [NumberOfBookmarked] => 1
+    [DiscountCouponPercent] => 5
+    [CouponHasRestrictions] => 
+    [HasLogo] => 1
+    [ResWebsiteMode] => 1
+    [Priority] => 6
+    [KosherCertificateImgUrl] => 
+    [IsExpressRes] => 
+    [HappyHourResRulesDescription] => Array
+        (
+        )
+
+    [PhoneOrdersOnlyOnPortals] => 
+)
+
+*/
+      //parse data
+      foreach ($data['restaurants'] as $rest) {
+      //   $rest_id = $rest->RestaurantId;    
+        if ($rest->PoolSumNumber) {
+          echo "<p>$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber</p>";
+        }
+      }
+  }
 }
