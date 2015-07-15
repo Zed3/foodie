@@ -14,7 +14,7 @@ class Rests extends Controller {
 
   public function index()
   {
-      $data['title'] = 'Restaurants';
+      $data['title'] = 'מסעדות';
       $data['rests'] = $this->_model->get_restaurants();
     if (empty($data['rests'])) {
       $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';

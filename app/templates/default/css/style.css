@@ -3,6 +3,8 @@
     text-align: right;
     direction: rtl;
   }
+  
+  body { padding-top: 70px; }
 
   .dish {
      margin: 20px auto;
@@ -21,4 +23,15 @@
   .search_dish_image {
     width: 40px;
     height: 20px;
+  }
+
+  .rest_box {
+    margin: 10px;
+    width: 25%;
+    float: right;
+  }
+
+  .rest_box .img-thumbnail {
+    height: 75px !important;
+    margin-left: 10px;
   }
