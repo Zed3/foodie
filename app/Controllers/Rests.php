@@ -84,8 +84,8 @@ class Rests extends Controller {
             'rest_id' => $rest_id,
             'dish_price' => $dish_price,
             'dish_image' => $dish_image ?: '',
-            'dish_title' => $dish_title ?: '',
-            'dish_desc' => $dish_desc ?: ''
+            'dish_title' => trim($dish_title) ?: '',
+            'dish_desc' => trim($dish_desc) ?: ''
           );
 
           $this->_model->add_dish($dish_data);
@@ -108,14 +108,23 @@ class Rests extends Controller {
       View::renderTemplate('footer', $data);
   }
 
+  public function search_post() {
+    if (isset($_POST['q'])) {
+      $this->search($_POST['q']);
+    }
+  }
+
   public function search($keyword)
   {
     $data['title'] = 'חיפוש';
     $data['results'] = $this->_model->search_dishes($keyword);
+    $data['keyword'] = $keyword;
 
     View::renderTemplate('header', $data);
+    View::render('search_results', $data);
     View::renderTemplate('footer', $data);
   }
+
   public function parse_all() {    
     ?>
 <script>
@@ -264,8 +273,8 @@ ajax.post = function(url, data, callback, sync) {
             'rest_id' => $rest_id,
             'dish_price' => $dish_price,
             'dish_image' => $dish_image ?: '',
-            'dish_title' => $dish_title ?: '',
-            'dish_desc' => $dish_desc ?: ''
+            'dish_title' => trim($dish_title) ?: '',
+            'dish_desc' => trim($dish_desc) ?: ''
           );
 
           $this->_model->add_dish($dish_data);

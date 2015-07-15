@@ -10,7 +10,7 @@ class Rests extends \Core\Model {
   }
 
   public function get_restaurants() {
-    return $this->db->select("SELECT * FROM restaurants");
+    return $this->db->select("SELECT * FROM restaurants LIMIT 500");
   }
 
   public function get_restaurant($id) {
@@ -18,7 +18,7 @@ class Rests extends \Core\Model {
   }
 
   public function get_dishes($rest_id) {
-    return $this->db->select("SELECT * FROM dishes WHERE rest_id = :rest_id", array(':rest_id' => $rest_id));
+    return $this->db->select("SELECT * FROM dishes WHERE rest_id = :rest_id LIMIT 100", array(':rest_id' => $rest_id));
   }
 
   public function add_restaurant($data) {
@@ -30,7 +30,7 @@ class Rests extends \Core\Model {
   }
 
   public function search_dishes($keyword) {
-    return $this->db->select('SELECT * FROM dishes WHERE dish_title LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
+    return $this->db->select('SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE dish_title LIKE :keyword OR dish_desc LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
   }
 
   public function parse_from_tenbis(){
