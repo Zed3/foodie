@@ -39,7 +39,8 @@ FROM
           delivery_times
       WHERE rest_id = :rest_id
     ";
-    return $this->db->select($query, array(':rest_id' => $rest_id));
+    $result = $this->db->select($query, array(':rest_id' => $rest_id));
+    return $result[0]->avg_delivery_time;
   }
 
   public function get_restaurant($id) {

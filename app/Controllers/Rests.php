@@ -345,8 +345,8 @@ stdClass Object
       //parse data
       foreach ($data['restaurants'] as $rest) {
          $rest_id = $rest->RestaurantId;
-         $rest = $this->_model->get_restaurant($rest_id);
-         print_r($rest[0]);
+         // $rest_data = $this->_model->get_restaurant($rest_id);
+         // print_r($rest_data[0]);
         if ($rest->PoolSumNumber) {
           $rest_avg = $this->_model->get_restaurant_avg_delivery_time($rest_id);
           echo "<a class='btn btn-default' href='#' role='button'>";
@@ -354,7 +354,7 @@ stdClass Object
           echo "<p>";
           echo "$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber";
           echo "</p>";
-          echo "<p>זמן הגעה ממוצע: $rest_avg</p>";
+          if ($rest_avg) echo "<p>זמן הגעה ממוצע: $rest_avg</p>";
           echo "</a>";
         }
       }
