@@ -12,18 +12,16 @@ class Rests extends \Core\Model {
   public function get_restaurants() {
     $query = "
       SELECT restaurants.*, avg_delivery_time FROM restaurants JOIN
-      (SELECT
-          rest_id,
-          CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
-                  ':',
-                  LPAD(ROUND(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) MOD 60),
-                          2,
-                          0)) AS avg_delivery_time
-      FROM
-          delivery_times
-      GROUP BY rest_id) AS avg_times
+(SELECT
+    rest_id,
+    CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
+            ':',
+            LPAD(ROUND(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) MOD 60),
+                    2,
+                    0)) AS avg_delivery_time
+FROM
+    delivery_times GROUP BY rest_id) AS avg_times
       USING(rest_id)
-      LIMIT 400
     ";
     return $this->db->select($query);
   }
@@ -39,26 +37,26 @@ class Rests extends \Core\Model {
                           0)) AS avg_delivery_time
       FROM
           delivery_times
-      WHERE rest_id = $rest_id
+      WHERE rest_id = :rest_id
     ";
-    return $this->db->select($query);
+    return $this->db->select($query, array(':rest_id' => $rest_id));
   }
 
   public function get_restaurant($id) {
 //    return $this->db->select("SELECT * FROM restaurants WHERE rest_id = :id LIMIT 1", array(':id' => $id));
     $query = "
-      SELECT restaurants.*, avg_delivery_time FROM restaurants WHERE rest_id = :id JOIN
-      (SELECT
-          rest_id,
-          CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
-                  ':',
-                  LPAD(ROUND(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) MOD 60),
-                          2,
-                          0)) AS avg_delivery_time
-      FROM
-          delivery_times
-      WHERE rest_id = :id) AS avg_times
+      SELECT restaurants.*, avg_delivery_time FROM restaurants JOIN
+(SELECT
+    rest_id,
+    CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
+            ':',
+            LPAD(ROUND(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) MOD 60),
+                    2,
+                    0)) AS avg_delivery_time
+FROM
+    delivery_times WHERE rest_id = :id) AS avg_times
       USING(rest_id)
+ WHERE rest_id = :id      
       LIMIT 1
     ";
     return $this->db->select($query, array(':id' => $id));
