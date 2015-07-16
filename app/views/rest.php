@@ -24,26 +24,6 @@ use Core\Language;
   }
 ?>
 
-<table id='dishes-table' class='table table-hover table-striped'>
-  <thead>
-    <tr><th>שם</th><th>תיאור</th><th>מחיר</th><th>תמונה</th></tr>
-  </thead>
-  <?php
-  if ($data['dishes']) {
-    foreach($data['dishes'] as $row){
-      echo "<tr>";
-      echo "<td>$row->dish_title</td>";
-      echo "<td>$row->dish_desc</td>";
-      echo "<td>$row->dish_price</td>";
-      echo "<td>";
-      if ($row->dish_image) echo "<a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a>";
-      echo "</td>";
-      echo "</tr>";
-    }
-  }
-?>
-</table>
-
 <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
 <div id="blueimp-gallery" class="blueimp-gallery" >
     <!-- The container for the modal slides -->
