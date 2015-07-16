@@ -33,7 +33,7 @@ class Rests extends Controller {
       }
 
       //Get and parse data
-      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
+      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.075523&Longitude=34.795268&timestamp=1387750840791';
       $content = json_decode(Curl::get($url));
       $content['timestamp'] = time();
       file_put_contents($this->_rests_file, json_encode($content));
@@ -341,12 +341,47 @@ stdClass Object
 )
 
 */
+      View::renderTemplate('header', $data);
       //parse data
       foreach ($data['restaurants'] as $rest) {
-      //   $rest_id = $rest->RestaurantId;
+         $rest_id = $rest->RestaurantId;
+         $rest = $this->_model->get_restaurant($rest_id);
+         print_r($rest[0]);
         if ($rest->PoolSumNumber) {
-          echo "<p>$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber</p>";
+          $rest_avg = $this->_model->get_restaurant_avg_delivery_time($rest_id);
+          echo "<a class='btn btn-default' href='#' role='button'>";
+          echo "<img src='$rest->RestaurantLogoUrl' class='img-thumbnail' alt='$row->rest_name' />";
+          echo "<p>";
+          echo "$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber";
+          echo "</p>";
+          echo "<p>זמן הגעה ממוצע: $rest_avg</p>";
+          echo "</a>";
         }
       }
+//      View::render('rests', $data);
+      View::renderTemplate('footer', $data);
+
+  }
+
+  public function delivery_report($rest_id){
+    $data['rest'] = $this->_model->get_restaurant($rest_id);
+    if (!$data['rest']) die('nothing was found');
+
+// for($i=0; $i<2000; $i++) {
+//     $data = array(
+//       'rest_id' => rand(51,17996),
+//       'user_id' => rand(100,2000),
+//       'timestamp' => rand(2013, 2015) . "-" . rand(1,12) . "-" . rand(1,30) . " " . rand(11,16) . ":" . rand(0,60)
+//     );
+
+//     $this->_model->delivery_report($data);
+// }
+//     die('temp');
+     $data = array(
+      'rest_id' => $rest_id,
+      'user_id' => 0
+    );
+
+    echo $this->_model->delivery_report($data);
   }
 }
