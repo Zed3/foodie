@@ -59,7 +59,7 @@ $hooks->run('afterBody');
       <ul class="nav navbar-nav">
         <li><a href="<?php echo DIR;?>rests">מסעדות</a></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="post">
+      <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="">
         <div class="form-group">
           <input type="text" class="form-control" name='q' placeholder="Search">
         </div>

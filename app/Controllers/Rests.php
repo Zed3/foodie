@@ -104,8 +104,8 @@ class Rests extends Controller {
   }
 
   public function search_post() {
-    if (isset($_POST['q'])) {
-      $this->search($_POST['q']);
+    if (isset($_REQUEST['q'])) {
+      $this->search($_REQUEST['q']);
     }
   }
 
