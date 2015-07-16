@@ -6,6 +6,7 @@ use Core\View,
 use Helpers\SimpleCurl as Curl;
 class Rests extends Controller {
   private $_model;
+  private $_rests_file = 'rests.json';
 
   public function __construct(){
     parent::__construct();
@@ -13,9 +14,33 @@ class Rests extends Controller {
   }
 
   public function fetch_restaurant_info() {
-    $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
-    $info = Curl::get($url);
-    return json_decode($info);
+
+    if (is_file($this->_rests_file) === false) {
+        file_put_contents($this->_rests_file, '');
+    }
+
+    $content = json_decode(file_get_contents($this->_rests_file));
+    $last_update = (time() - $content->timestamp) / 60;
+    unset($content->timestamp);
+
+    if (!$content || !$last_update || $last_update > 5) {
+      $f = fopen($this->_rests_file, "r+");
+      if ($f !== false) {
+        ftruncate($f, 0);
+        fclose($f);
+      }
+      //Get and parse data
+      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
+      $content = json_decode(Curl::get($url));
+      $content['timestamp'] = time();
+      file_put_contents($this->_rests_file, json_encode($content));
+
+      //TODO: Parse data and update db if needed
+    } else {
+      $content = json_decode(file_get_contents($this->_rests_file));
+    }
+
+    return $content;
   }
 
   public function index()
