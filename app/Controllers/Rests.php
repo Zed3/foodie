@@ -106,6 +106,8 @@ class Rests extends Controller {
   public function search_post() {
     if (isset($_REQUEST['q'])) {
       $this->search($_REQUEST['q']);
+    } else {
+      Url::redirect();
     }
   }
 

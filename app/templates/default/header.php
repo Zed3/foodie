@@ -61,7 +61,7 @@ $hooks->run('afterBody');
       </ul>
       <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="">
         <div class="form-group">
-          <input type="text" class="form-control" name='q' placeholder="Search">
+          <input type="text" class="form-control" name='q' placeholder="Search" value="<?php if (isset($data['keyword'])) echo $data['keyword'];?>">
         </div>
         <button type="submit" class="btn btn-default">חיפוש</button>
       </form>
