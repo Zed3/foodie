@@ -13,22 +13,25 @@ class Rests extends Controller {
     $this->_model = new \Models\Rests();
   }
 
-  public function fetch_restaurant_info() {
+  public function fetch_restaurant_info($force = false) {
 
+    //Make sure file exists
     if (is_file($this->_rests_file) === false) {
         file_put_contents($this->_rests_file, '');
     }
 
+    //Parse info from existing file and get last update info
     $content = json_decode(file_get_contents($this->_rests_file));
     $last_update = (time() - $content->timestamp) / 60;
     unset($content->timestamp);
 
-    if (!$content || !$last_update || $last_update > 5) {
+    if (!$content || !$last_update || $last_update > 10 * 60 || $force) {
       $f = fopen($this->_rests_file, "r+");
       if ($f !== false) {
         ftruncate($f, 0);
         fclose($f);
       }
+
       //Get and parse data
       $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
       $content = json_decode(Curl::get($url));
@@ -88,47 +91,10 @@ class Rests extends Controller {
   {
       $data['rest'] = $this->_model->get_restaurant($rest_id);
       $data['title'] = $data['rest'][0]->rest_name;
-
       $data['dishes'] = $this->_model->get_dishes($rest_id);
+
       if (empty($data['dishes'])) {
-        libxml_use_internal_errors(true);
-        $url = "https://www.10bis.co.il/Restaurants/Menu/Delivery/$rest_id";
-        $content = Curl::get($url);
-        @$doc = new \DOMDocument();
-        @$doc->loadHTML($content);
-        @$xml = simplexml_import_dom($doc); // just to make xpath more simple
-        @$dishes = $xml->xpath("//div[@data-dishid]");
-
-        foreach ($dishes as $dish) {
-          @$dish_id = $dish['data-dishid'];
-          @$dish_title = $dish->div[1]->div->p ?: $dish->div->div->p;
-          @$dish_price = $dish->div[1]->div[1] ?: $dish->div->div[1];
-          @$dish_price = floatval(str_replace('₪', '', $dish_price));
-          @$dish_image = $dish->div['style']; //TODO: parse this :/
-          @$dish_desc = $dish['title'];
-          @$dish_image = str_replace(array('background: url(', ') no-repeat center;'), '', $dish_image);
-          if (!$dish_price) continue;
-          $dish_data = array(
-            'dish_id' => $dish_id,
-            'rest_id' => $rest_id,
-            'dish_price' => $dish_price,
-            'dish_image' => $dish_image ?: '',
-            'dish_title' => trim($dish_title) ?: '',
-            'dish_desc' => trim($dish_desc) ?: ''
-          );
-
-          $this->_model->add_dish($dish_data);
-
-            // echo "<div class='dish'>";
-            // echo "<img class='img-thumbnail dish_image' src='$dish_image' />";
-            // echo "<div class='dish_details'>";
-            // echo "<h3>$dish_title</h3>";
-            // echo "<p>$dish_desc</p>";
-            // echo "<div>$dish_price</div>";
-            // echo "</div>";
-            // echo "</div>";
-        }
-
+        $this->parse($rest_id);
         $data['dishes'] = $this->_model->get_dishes($rest_id);
       }
 
@@ -307,15 +273,6 @@ ajax.post = function(url, data, callback, sync) {
           );
 
           $this->_model->add_dish($dish_data);
-
-            echo "<div class='dish'>";
-            echo "<img class='img-thumbnail dish_image' src='$dish_image' />";
-            echo "<div class='dish_details'>";
-            echo "<h3>$dish_title</h3>";
-            echo "<p>$dish_desc</p>";
-            echo "<div>$dish_price</div>";
-            echo "</div>";
-            echo "</div>";
         }
       }
   }
