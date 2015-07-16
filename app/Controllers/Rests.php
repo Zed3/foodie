@@ -12,14 +12,18 @@ class Rests extends Controller {
     $this->_model = new \Models\Rests();
   }
 
+  public function fetch_restaurant_info() {
+    $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
+    $info = Curl::get($url);
+    return json_decode($info);
+  }
+
   public function index()
   {
       $data['title'] = 'מסעדות';
       $data['rests'] = $this->_model->get_restaurants();
     if (empty($data['rests'])) {
-      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
-      $info = Curl::get($url);
-      $data['restaurants'] = json_decode($info);
+      $data['restaurants'] = $this->fetch_restaurant_info();
 
       //parse data
       foreach ($data['restaurants'] as $rest) {
@@ -125,7 +129,7 @@ class Rests extends Controller {
     View::renderTemplate('footer', $data);
   }
 
-  public function parse_all() {    
+  public function parse_all() {
     ?>
 <script>
 var ajax = {};
@@ -287,14 +291,12 @@ ajax.post = function(url, data, callback, sync) {
             echo "<div>$dish_price</div>";
             echo "</div>";
             echo "</div>";
-        }    
+        }
       }
   }
 
   public function ping() {
-      $url = 'http://www.10bis.co.il/Restaurants/SearchRestaurants?deliveryMethod=Delivery&ShowOnlyOpenForDelivery=False&id=942159&pageNum=0&pageSize=1000&ShowOnlyOpenForDelivery=false&OrderBy=delivery_sum&cuisineType=&StreetId=0&FilterByKosher=false&FilterByBookmark=false&FilterByCoupon=false&searchPhrase=&Latitude=32.0696&Longitude=34.7935&timestamp=1387750840791';
-      $info = Curl::get($url);
-      $data['restaurants'] = json_decode($info);
+      $data['restaurants'] = $this->fetch_restaurant_info();
 /*
 stdClass Object
 (
@@ -310,54 +312,54 @@ stdClass Object
     [distanceFromUser] => 0 ×ž×˜×¨×™×
     [distanceFromUserInMeters] => 0
     [IsOpenForDelivery] => 1
-    [IsOpenForPickup] => 
+    [IsOpenForPickup] =>
     [MinimumOrder] => â‚ª100.00
     [MinimumPriceForOrder] => 100
     [DeliveryPrice] => ×—×™× ×
     [DeliveryPriceForOrder] => 0
-    [IsKosher] => 
-    [RestaurantKosher] => 
-    [DeliveryRemarks] => 
+    [IsKosher] =>
+    [RestaurantKosher] =>
+    [DeliveryRemarks] =>
     [ResGeoLocation_lon] => 34.7892544
     [ResGeoLocation_lat] => 32.0708773
-    [HappyHourDiscount] => 
+    [HappyHourDiscount] =>
     [HappyHourDiscountPercent] => 0
     [deliveryChargeValueType] => 0
     [HappyHourDiscountValidityString] => ×ª×§×£ ×¢×“ 00:00
-    [StartOrderURL] => 
+    [StartOrderURL] =>
     [ActivityHours] => 09:00 - 22:45
     [PickupActivityHours] => 00:00 - 00:00
-    [DeliveryTime] => 
-    [IsHappyHourActive] => 
+    [DeliveryTime] =>
+    [IsHappyHourActive] =>
     [IsPromotionActive] => 1
-    [CompanyFlag] => 
-    [IsOverPoolMin] => 
+    [CompanyFlag] =>
+    [IsOverPoolMin] =>
     [PoolSum] => â‚ª 0.00
     [PoolSumNumber] => 0
     [DeliveryEndTime] => 22:45
-    [IsTerminalActive] => 
+    [IsTerminalActive] =>
     [IsActiveForDelivery] => 1
     [IsActiveForPickup] => 1
-    [Bookmarked] => 
+    [Bookmarked] =>
     [NumberOfBookmarked] => 1
     [DiscountCouponPercent] => 5
-    [CouponHasRestrictions] => 
+    [CouponHasRestrictions] =>
     [HasLogo] => 1
     [ResWebsiteMode] => 1
     [Priority] => 6
-    [KosherCertificateImgUrl] => 
-    [IsExpressRes] => 
+    [KosherCertificateImgUrl] =>
+    [IsExpressRes] =>
     [HappyHourResRulesDescription] => Array
         (
         )
 
-    [PhoneOrdersOnlyOnPortals] => 
+    [PhoneOrdersOnlyOnPortals] =>
 )
 
 */
       //parse data
       foreach ($data['restaurants'] as $rest) {
-      //   $rest_id = $rest->RestaurantId;    
+      //   $rest_id = $rest->RestaurantId;
         if ($rest->PoolSumNumber) {
           echo "<p>$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber</p>";
         }
