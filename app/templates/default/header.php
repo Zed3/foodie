@@ -25,6 +25,7 @@ $hooks = Hooks::get();
 		'//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css',
 		'//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css',
 		'//blueimp.github.io/Gallery/css/blueimp-gallery.min.css',
+    'https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css',
 		Url::templatePath() . 'css/style.css',
 	));
 
@@ -61,7 +62,7 @@ $hooks->run('afterBody');
       </ul>
       <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="">
         <div class="form-group">
-          <input type="text" class="form-control" name='q' placeholder="Search" value="<?php if (isset($data['keyword'])) echo $data['keyword'];?>">
+          <input type="text" id="navbar-search" class="form-control" name='q' placeholder="Search" value="<?php if (isset($data['keyword'])) echo $data['keyword'];?>">
         </div>
         <button type="submit" class="btn btn-default">חיפוש</button>
       </form>

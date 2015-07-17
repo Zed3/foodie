@@ -286,7 +286,7 @@ ajax.post = function(url, data, callback, sync) {
         if (!$rest->RestaurantId) continue;
         $rest->rest_id = intval($rest->RestaurantId);
         $rest->avg_delivery = $this->_model->get_restaurant_avg_delivery_time($rest->rest_id);
-      } 
+      }
 /*
 stdClass Object
 (

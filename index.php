@@ -72,6 +72,7 @@ Router::any('search', 'Controllers\Rests@search_post');
 Router::any('ping', 'Controllers\Rests@ping');
 Router::any('search/(:any)', 'Controllers\Rests@search');
 Router::any('rests', 'Controllers\Rests@index');
+Router::any('json/search', 'Controllers\Json@search');
 Router::any('', 'Controllers\Welcome@index');
 
 //module routes
