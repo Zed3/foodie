@@ -1,3 +1,27 @@
+<h3>Exception information:</h3>
+
+           <p><strong>Date:</strong> Jul 17, 2015 17:42PM</p>
+
+           <p><strong>Message:</strong> SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '%במבה%'' at line 1</p>
+
+           <p><strong>Code:</strong> 42000</p>
+
+           <p><strong>File:</strong> C:\wamp\www\subdomains\foodie\app\Helpers\Database.php</p>
+
+           <p><strong>Line:</strong> 100</p>
+
+           <h3>Stack trace:</h3>
+
+           <pre>#0 C:\wamp\www\subdomains\foodie\app\Helpers\Database.php(100): PDOStatement->execute()
+#1 C:\wamp\www\subdomains\foodie\app\Models\Rests.php(84): Helpers\Database->select('SELECT * FROM r...', Array)
+#2 C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php(118): Models\Rests->search_restaurants('\xD7\x91\xD7\x9E\xD7\x91\xD7\x94')
+#3 C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php(108): Controllers\Rests->search('\xD7\x91\xD7\x9E\xD7\x91\xD7\x94')
+#4 C:\wamp\www\subdomains\foodie\app\Core\Router.php(92): Controllers\Rests->search_post()
+#5 C:\wamp\www\subdomains\foodie\app\Core\Router.php(219): Core\Router::invokeObject('Controllers\\Res...', Array)
+#6 C:\wamp\www\subdomains\foodie\index.php(88): Core\Router::dispatch()
+#7 {main}</pre>
+
+           <hr />
 <p>Error on Jul 17, 2015 15:43PM - array_rand() expects parameter 1 to be array, object given in C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php on line 284</p><p>Error on Jul 17, 2015 15:41PM - array_rand() expects parameter 1 to be array, object given in C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php on line 284</p><p>Error on Jul 17, 2015 15:40PM - Attempt to assign property of non-object in C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php on line 286</p><p>Error on Jul 17, 2015 15:39PM - Attempt to assign property of non-object in C:\wamp\www\subdomains\foodie\app\Controllers\Rests.php on line 285</p><h3>Exception information:</h3>
 
            <p><strong>Date:</strong> Jul 16, 2015 20:07PM</p>

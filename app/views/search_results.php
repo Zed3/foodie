@@ -8,7 +8,8 @@ use Core\Language;
   <h1><?php echo $data['title']; ?></h1>
 </div>
 <?php
-	switch (sizeof($data['results'])) {
+  $total_results = sizeof($data['results_dishes']) + sizeof($data['results_restaurants']);
+	switch ($total_results) {
 		case 0:
 			$string = "לא נמצאו תוצאות";
 		break;
@@ -18,12 +19,37 @@ use Core\Language;
 		break;
 
 		default:
-			$string = "נמצאו " . sizeof($data['results']) . " תוצאות";
+			$string = "נמצאו " . $total_results . " תוצאות";
 
 	}
 	echo "<h3>$string עבור \"" . $data['keyword'] ."\"</h3>";
+  
+  //show dishes
+  if ($data['results_restaurants']) {
+    echo "<h3>מסעדות</h3>";
+    echo "
+    <table id='dishes-table1' class='table table-hover table-striped'>
+      <thead>
+        <tr>
+          <td>שם המסעדה</td>
+        </tr>
+      </thead>
+      <tbody>
+    ";
+    foreach($data['results_restaurants'] as $row){
+      echo "<tr>";
+      echo "<td><a href='" . DIR . "rest/$row->rest_id'>$row->rest_name</a></td>";
+      echo "</tr>";
+    }
+    echo "
+      </tbody>
+    </table>
+    ";
+  }
 
-  if ($data['results']) {
+  //show dishes
+  if ($data['results_dishes']) {
+    echo "<h3>מנות</h3>";
   	echo "
 		<table id='dishes-table1' class='table table-hover table-striped'>
 			<thead>
@@ -35,7 +61,7 @@ use Core\Language;
 			</thead>
 			<tbody>
   	";
-    foreach($data['results'] as $row){
+    foreach($data['results_dishes'] as $row){
       echo "<tr>";
       // echo "<td>";
       // if ($row->dish_image) echo "<a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a>";

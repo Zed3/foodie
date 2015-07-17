@@ -114,7 +114,8 @@ class Rests extends Controller {
   public function search($keyword)
   {
     $data['title'] = 'חיפוש';
-    $data['results'] = $this->_model->search_dishes($keyword);
+    $data['results_dishes'] = $this->_model->search_dishes($keyword);
+    $data['results_restaurants'] = $this->_model->search_restaurants($keyword);
     $data['keyword'] = $keyword;
 
     View::renderTemplate('header', $data);

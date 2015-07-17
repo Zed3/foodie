@@ -80,6 +80,10 @@ FROM
     return $this->db->select('SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE dish_title LIKE :keyword OR dish_desc LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
   }
 
+  public function search_restaurants($keyword) {
+    return $this->db->select('SELECT * FROM restaurants WHERE rest_name LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
+  }
+
   public function parse_from_tenbis(){
   }
 
