@@ -281,6 +281,11 @@ ajax.post = function(url, data, callback, sync) {
 
   public function ping() {
       $data['restaurants'] = $this->fetch_restaurant_info();
+      foreach ($data['restaurants'] as $rest) {
+        if (!$rest->RestaurantId) continue;
+        $rest->rest_id = intval($rest->RestaurantId);
+        $rest->avg_delivery = $this->_model->get_restaurant_avg_delivery_time($rest->rest_id);
+      } 
 /*
 stdClass Object
 (
@@ -342,23 +347,7 @@ stdClass Object
 
 */
       View::renderTemplate('header', $data);
-      //parse data
-      foreach ($data['restaurants'] as $rest) {
-         $rest_id = $rest->RestaurantId;
-         // $rest_data = $this->_model->get_restaurant($rest_id);
-         // print_r($rest_data[0]);
-        if ($rest->PoolSumNumber) {
-          $rest_avg = $this->_model->get_restaurant_avg_delivery_time($rest_id);
-          echo "<a class='btn btn-default' href='#' role='button'>";
-          echo "<img src='$rest->RestaurantLogoUrl' class='img-thumbnail' alt='$row->rest_name' />";
-          echo "<p>";
-          echo "$rest->RestaurantId $rest->RestaurantName $rest->PoolSumNumber";
-          echo "</p>";
-          if ($rest_avg) echo "<p>זמן הגעה ממוצע: $rest_avg</p>";
-          echo "</a>";
-        }
-      }
-//      View::render('rests', $data);
+      View::render('ping', $data);
       View::renderTemplate('footer', $data);
 
   }
