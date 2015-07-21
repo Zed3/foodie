@@ -72,16 +72,6 @@ class Rests extends Controller {
       }
     }
 
-// foreach($data['rests'] as $row){
-//   //$this->_model->get_dishes();
-//   //echo "Working on $row->rest_name<br/>";
-
-//   $url = DIR . "rests/$row->rest_id";
-//   echo "<script>";
-//   echo "ajax.get('$url', {}, function() {});";
-//   echo "</script>";
-// }
-
       View::renderTemplate('header', $data);
       View::render('rests', $data);
       View::renderTemplate('footer', $data);
@@ -299,70 +289,10 @@ ajax.post = function(url, data, callback, sync) {
         }
       }
 
-      // $data['restaurants'] = $data['restaurants'] ? : $this->fetch_restaurant_info($force);
       foreach ($data['deliveries'] as $rest) {
         $rest->avg_delivery = $this->_model->get_restaurant_avg_delivery_time($rest->rest_id);
       }
-/*
-stdClass Object
-(
-    [RestaurantId] => 17160
-    [RestaurantName] => ×¤×™×¦×” ×”×ª×—× ×”
-    [RestaurantAddress] => ×ž× ×—× ×‘×’×™×Ÿ 116 ×ª×œ ××‘×™×‘
-    [RestaurantCityName] => ×ª×œ ××‘×™×‘
-    [RestaurantLogoUrl] => https://d25t2285lxl5rf.cloudfront.net/images/shops/17160.png
-    [RestaurantPhone] => 03-5090620
-    [RestaurantCuisineList] => ××™×˜×œ×§×™, ×¡×œ×˜×™×/×¡× ×“×•×•×™×¦`×™×, ×¤×™×¦×¨×™×•×ª
-    [NumOfReviews] => 5
-    [ReviewsRank] => 9
-    [distanceFromUser] => 0 ×ž×˜×¨×™×
-    [distanceFromUserInMeters] => 0
-    [IsOpenForDelivery] => 1
-    [IsOpenForPickup] =>
-    [MinimumOrder] => â‚ª100.00
-    [MinimumPriceForOrder] => 100
-    [DeliveryPrice] => ×—×™× ×
-    [DeliveryPriceForOrder] => 0
-    [IsKosher] =>
-    [RestaurantKosher] =>
-    [DeliveryRemarks] =>
-    [ResGeoLocation_lon] => 34.7892544
-    [ResGeoLocation_lat] => 32.0708773
-    [HappyHourDiscount] =>
-    [HappyHourDiscountPercent] => 0
-    [deliveryChargeValueType] => 0
-    [HappyHourDiscountValidityString] => ×ª×§×£ ×¢×“ 00:00
-    [StartOrderURL] =>
-    [ActivityHours] => 09:00 - 22:45
-    [PickupActivityHours] => 00:00 - 00:00
-    [DeliveryTime] =>
-    [IsHappyHourActive] =>
-    [IsPromotionActive] => 1
-    [CompanyFlag] =>
-    [IsOverPoolMin] =>
-    [PoolSum] => â‚ª 0.00
-    [PoolSumNumber] => 0
-    [DeliveryEndTime] => 22:45
-    [IsTerminalActive] =>
-    [IsActiveForDelivery] => 1
-    [IsActiveForPickup] => 1
-    [Bookmarked] =>
-    [NumberOfBookmarked] => 1
-    [DiscountCouponPercent] => 5
-    [CouponHasRestrictions] =>
-    [HasLogo] => 1
-    [ResWebsiteMode] => 1
-    [Priority] => 6
-    [KosherCertificateImgUrl] =>
-    [IsExpressRes] =>
-    [HappyHourResRulesDescription] => Array
-        (
-        )
 
-    [PhoneOrdersOnlyOnPortals] =>
-)
-
-*/
       View::renderTemplate('header', $data);
       View::render('ping', $data);
       View::renderTemplate('footer', $data);
@@ -370,24 +300,10 @@ stdClass Object
   }
 
   public function delivery_report($report_id){
-    // $data['rest'] = $this->_model->get_restaurant($rest_id);
-    // if (!$data['rest']) die('nothing was found');
-
-// for($i=0; $i<2000; $i++) {
-//     $data = array(
-//       'rest_id' => rand(51,17996),
-//       'user_id' => rand(100,2000),
-//       'timestamp' => rand(2013, 2015) . "-" . rand(1,12) . "-" . rand(1,30) . " " . rand(11,16) . ":" . rand(0,60)
-//     );
-
-//     $this->_model->delivery_report($data);
-// }
-//     die('temp');
      $data = array(
       'report_id' => $report_id,
       'user_id' => 0,
       'arrived' => $this->_model->now()
-//      'arrived' => date('Y-m-d H:i:s',time())
     );
 
     echo $this->_model->delivery_report($data);
