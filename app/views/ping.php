@@ -11,7 +11,8 @@
 <?php
       //parse data
       foreach ($data['restaurants'] as $rest) {
-      	if (rand(0,15)) continue;
+        if (!$rest->PoolSumNumber) continue;
+      	//if (rand(0,15)) continue;
         if ($rest->PoolSumNumber || 0==0) {
         	echo "<div class='row'>";
           echo "<a class='btn btn-default' href='#' role='button'>";

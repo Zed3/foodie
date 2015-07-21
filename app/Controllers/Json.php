@@ -26,7 +26,18 @@ class Json extends Controller {
     $this->put($output);
   }
 
+  public function all_dishes() {
+    $data = $this->_model->get_all_dishes();
+    $output = [];
+    foreach ($data as $item) {
+      $output["data"][] = array_values((array)$item);
+    }
+    $this->put($output);
+  }
+
   public function put($data) {
+    // header('Content-disposition: attachment; filename=file.json');
+    // header('Content-type: application/json');
     echo json_encode($data);
   }
 }

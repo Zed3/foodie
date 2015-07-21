@@ -57,7 +57,7 @@ FROM
 FROM
     delivery_times WHERE rest_id = :id) AS avg_times
       USING(rest_id)
- WHERE rest_id = :id      
+ WHERE rest_id = :id
       LIMIT 1
     ";
     return $this->db->select($query, array(':id' => $id));
@@ -66,6 +66,10 @@ FROM
 
   public function get_dishes($rest_id) {
     return $this->db->select("SELECT * FROM dishes WHERE rest_id = :rest_id LIMIT 300", array(':rest_id' => $rest_id));
+  }
+
+  public function get_all_dishes() {
+    return $this->db->select("SELECT dish_title, dish_desc, dish_price, rest_name FROM dishes JOIN restaurants USING(rest_id) LIMIT 10000");
   }
 
   public function add_restaurant($data) {
@@ -87,6 +91,10 @@ FROM
   public function parse_from_tenbis(){
   }
 
+  public function fetch_today_deliveries(){
+    return $this->db->select("SELECT * FROM delivery_times WHERE DATE(timestamp) = DATE(CURRENT_TIMESTAMP)");
+  }
+
   public function delivery_report($data){
 
     /*
@@ -101,6 +109,10 @@ FROM
     delivery_times
 GROUP BY rest_id
     */
+    return $this->db->insert("delivery_times",$data);
+  }
+
+  public function add_delivery($data){
     return $this->db->insert("delivery_times",$data);
   }
 }

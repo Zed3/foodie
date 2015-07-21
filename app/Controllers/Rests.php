@@ -281,7 +281,25 @@ ajax.post = function(url, data, callback, sync) {
   }
 
   public function ping() {
-      $data['restaurants'] = $this->fetch_restaurant_info();
+      $force = isset($_REQUEST['force']) ? $_REQUEST['force'] : 0;
+
+      //get pending deliveries
+      $data['deliveries'] = $this->_model->fetch_today_deliveries();
+
+      //if there are no deliveries for today, add them
+      if (empty($data['deliveries'])) {
+        $data['restaurants'] = $this->fetch_restaurant_info($force);
+        foreach ($data['restaurants'] as $rest) {
+          if (!$rest->PoolSumNumber) continue;
+          $row = array(
+            'rest_id' => intval($rest->RestaurantId),
+            'total_delivery' => floatval($rest->PoolSumNumber)
+          );
+          $this->_model->add_delivery($row);
+        }
+      }
+
+      $data['restaurants'] = $data['restaurants'] ? : $this->fetch_restaurant_info($force);
       foreach ($data['restaurants'] as $rest) {
         if (!$rest->RestaurantId) continue;
         $rest->rest_id = intval($rest->RestaurantId);
