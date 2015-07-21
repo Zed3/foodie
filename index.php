@@ -64,6 +64,7 @@ use Helpers\Hooks;
 Router::any('rest/(:num)', 'Controllers\Rests@rest');
 Router::any('rests/(:num)', 'Controllers\Rests@rest');
 Router::any('rest/(:num)/delivery_report', 'Controllers\Rests@delivery_report');
+Router::any('delivery/(:num)', 'Controllers\Rests@delivery_report');
 
 Router::any('dishes/parse/(:num)', 'Controllers\Rests@parse');
 Router::any('dishes/parse_all', 'Controllers\Rests@parse_all');

@@ -30,9 +30,9 @@ FROM
     $query = "
       SELECT
           rest_id,
-          CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
+          CONCAT(AVG(HOUR(arrived) * 60 + MINUTE(arrived)) DIV 60,
                   ':',
-                  LPAD(ROUND(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) MOD 60),
+                  LPAD(ROUND(AVG(HOUR(arrived) * 60 + MINUTE(arrived)) MOD 60),
                           2,
                           0)) AS avg_delivery_time
       FROM
@@ -91,8 +91,13 @@ FROM
   public function parse_from_tenbis(){
   }
 
+  public function now(){
+    $res = $this->db->select("SELECT CURRENT_TIMESTAMP AS now");
+    return $res[0]->now;
+  }
+
   public function fetch_today_deliveries(){
-    return $this->db->select("SELECT * FROM delivery_times WHERE DATE(timestamp) = DATE(CURRENT_TIMESTAMP)");
+    return $this->db->select("SELECT * FROM delivery_times JOIN restaurants USING(rest_id) WHERE DATE(timestamp) = DATE(CURRENT_TIMESTAMP) AND arrived IS NULL");
   }
 
   public function delivery_report($data){
@@ -109,7 +114,8 @@ FROM
     delivery_times
 GROUP BY rest_id
     */
-    return $this->db->insert("delivery_times",$data);
+    $where = array('report_id' => $data['report_id']);
+    return $this->db->update("delivery_times",$data, $where);
   }
 
   public function add_delivery($data){

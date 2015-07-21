@@ -299,10 +299,8 @@ ajax.post = function(url, data, callback, sync) {
         }
       }
 
-      $data['restaurants'] = $data['restaurants'] ? : $this->fetch_restaurant_info($force);
-      foreach ($data['restaurants'] as $rest) {
-        if (!$rest->RestaurantId) continue;
-        $rest->rest_id = intval($rest->RestaurantId);
+      // $data['restaurants'] = $data['restaurants'] ? : $this->fetch_restaurant_info($force);
+      foreach ($data['deliveries'] as $rest) {
         $rest->avg_delivery = $this->_model->get_restaurant_avg_delivery_time($rest->rest_id);
       }
 /*
@@ -371,9 +369,9 @@ stdClass Object
 
   }
 
-  public function delivery_report($rest_id){
-    $data['rest'] = $this->_model->get_restaurant($rest_id);
-    if (!$data['rest']) die('nothing was found');
+  public function delivery_report($report_id){
+    // $data['rest'] = $this->_model->get_restaurant($rest_id);
+    // if (!$data['rest']) die('nothing was found');
 
 // for($i=0; $i<2000; $i++) {
 //     $data = array(
@@ -386,8 +384,10 @@ stdClass Object
 // }
 //     die('temp');
      $data = array(
-      'rest_id' => $rest_id,
-      'user_id' => 0
+      'report_id' => $report_id,
+      'user_id' => 0,
+      'arrived' => $this->_model->now()
+//      'arrived' => date('Y-m-d H:i:s',time())
     );
 
     echo $this->_model->delivery_report($data);
