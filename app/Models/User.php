@@ -15,7 +15,7 @@ class User extends \Core\Model {
   }
 
   public function get_rand_dishes($limit=20){
-  	$data = $this->db->select("SELECT * FROM dishes JOIN restaurants USING(rest_id) ORDER BY RAND() LIMIT :limit", array(':limit' => $limit));
+  	$data = $this->db->select("SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE dish_price > 20 ORDER BY RAND() LIMIT :limit", array(':limit' => $limit));
   	return $data;
   }
 }
