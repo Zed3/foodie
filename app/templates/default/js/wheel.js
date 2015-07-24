@@ -383,19 +383,23 @@
     },
   }
 
+  wheel_init = function() {
+      wheel.init();
+
+      var segments = new Array();
+      $.each($('#venues input:checked'), function(key, cbox) {
+        segments.push( cbox.value );
+      });
+
+      wheel.segments = segments;
+      wheel.update();
+
+      // Hide the address bar (for mobile devices)!
+      setTimeout(function() {
+        window.scrollTo(0, 1);
+      }, 0);
+    }
+
   window.onload = function() {
-    wheel.init();
-
-    var segments = new Array();
-    $.each($('#venues input:checked'), function(key, cbox) {
-      segments.push( cbox.value );
-    });
-
-    wheel.segments = segments;
-    wheel.update();
-
-    // Hide the address bar (for mobile devices)!
-    setTimeout(function() {
-      window.scrollTo(0, 1);
-    }, 0);
+    wheel_init();
   }

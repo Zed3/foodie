@@ -27,6 +27,7 @@ $hooks = Hooks::get();
 		'//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css',
 		'//blueimp.github.io/Gallery/css/blueimp-gallery.min.css',
     'https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css',
+    '//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/cdnjs/3.3.1/css/bootstrap-rtl.min.css',
 		Url::templatePath() . 'css/style.css',
 	));
 
