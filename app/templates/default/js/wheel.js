@@ -268,7 +268,7 @@
       var centerY = wheel.centerY;
       var size = wheel.size;
 
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 5;
       ctx.strokeStyle = '#000000';
       ctx.fileStyle = '#ffffff';
 
