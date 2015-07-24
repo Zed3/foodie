@@ -334,14 +334,4 @@ ajax.post = function(url, data, callback, sync) {
 
     echo $this->_model->delivery_report($data);
   }
-
-  public function add_favorite($user_id, $rest_id, $dish_id=null) {
-    $data = array(
-      'user_id' => $user_id,
-      'rest_id' => $rest_id,
-      'dish_id' => $dish_id
-    );
-
-    echo $this->_model->add_favorite($data);    
-  }
 }

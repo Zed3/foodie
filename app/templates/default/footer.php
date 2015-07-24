@@ -19,7 +19,8 @@ Assets::js(array(
   '//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js',
   'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js',
   '//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js',
-  Url::templatePath() . 'js/site.js'
+  Url::templatePath() . 'js/site.js',
+  Url::templatePath() . 'js/jquery.tinysort.js'
 ));
 
 //hook for plugging in javascript

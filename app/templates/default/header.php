@@ -70,8 +70,8 @@ $hooks->run('afterBody');
       <ul class="nav navbar-nav navbar-right">
         <?php
           //handle user login
-          $user = Session::get('user');
-          if ($user->user_name) {
+          $user = new \Controllers\User();
+          if ($user->get_current_user()) {
             echo "<li><a href='" . DIR . "logout'>Logout</a></li>";
           } else {
             echo "<li><a href='" . DIR . "login'>Login</a></li>";
