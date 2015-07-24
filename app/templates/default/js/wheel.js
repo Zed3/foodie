@@ -274,9 +274,9 @@
 
       ctx.beginPath();
 
-      ctx.moveTo(centerX + size - 40, centerY);
-      ctx.lineTo(centerX + size + 20, centerY - 10);
-      ctx.lineTo(centerX + size + 20, centerY + 10);
+      ctx.moveTo(centerX + size - 20, centerY);
+      ctx.lineTo(centerX + size + 10, centerY - 10);
+      ctx.lineTo(centerX + size + 10, centerY + 10);
       ctx.closePath();
 
       ctx.stroke();
@@ -319,6 +319,7 @@
       ctx.closePath();
 
       ctx.fillStyle = colors[key];
+      ctx.fillStyle = (key % 2 === 0) ? '#BD4932' : '#FFFAD5';
       ctx.fill();
       ctx.stroke();
 
@@ -364,13 +365,13 @@
       }
       // Draw a center circle
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 20, 0, PI2, false);
+      ctx.arc(centerX, centerY, 10, 0, PI2, false);
       ctx.closePath();
 
       ctx.fillStyle   = '#ffffff';
       ctx.strokeStyle = '#000000';
       ctx.fill();
-      ctx.stroke();
+      // ctx.stroke();
 
       // Draw outer circle
       ctx.beginPath();
