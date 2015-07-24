@@ -24,12 +24,24 @@ class User extends Controller {
   }
 
   public function dishes() {
+    $data['title'] = "מנות מועדפות";
     $user_id = $this->_user->user_id;
     $data['results_dishes'] = $this->_model->get_fav_dishes($user_id);
+    $data['random_dishes'] = $data['results_dishes'] ?: $this->_model->get_rand_dishes(20);
 
     View::renderTemplate('header', $data);
     View::render('fav_dishes', $data);
-    View::renderTemplate('footer', $data);	
+    View::render('random_dish', $data);    
+    View::renderTemplate('footer', $data);  
+  }
+
+  public function rand_dish() {
+    $data['title'] = "מנה בהפתעה";
+    $data['random_dishes'] = $this->_model->get_rand_dishes(20);
+
+    View::renderTemplate('header', $data);
+    View::render('random_dish', $data);    
+    View::renderTemplate('footer', $data);  
   }
 
   public function add_favorite($rest_id, $dish_id=null) {

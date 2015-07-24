@@ -20,6 +20,7 @@ Assets::js(array(
   'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js',
   '//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js',
   Url::templatePath() . 'js/site.js',
+  Url::templatePath() . 'js/wheel.js',
   Url::templatePath() . 'js/jquery.tinysort.js'
 ));
 

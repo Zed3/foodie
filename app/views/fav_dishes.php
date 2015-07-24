@@ -10,9 +10,9 @@ use Core\Language;
 
 <?php
   if ($data['results_dishes']) {
-  	echo "<h3>מנות מועדפות</h3>";
+  	echo "<h3>" . $data['title'] . "</h3>";
   	echo "
-		<table id='dishes-table1' class='table table-hover table-striped'>
+		<table id='dishes-table' class='table table-hover table-striped'>
 			<thead>
 				<tr>
 					<td>שם המנה</td>
@@ -42,27 +42,6 @@ use Core\Language;
     ";
   }
 ?>
-
-
-<!-- <div id="venues" style="float: left"><ul>
-<?php
-	foreach($data['results_dishes'] as $row){
-		echo  "<li><input id='venue-" . $row->dish_id . "' name='" . $row->dish_title . "' value='" . $row->dish_title . "' type='checkbox' checked='checked'>
-			<label for='venue-" . $row->dish_id . "'>" . $row->dish_title . "</label>
-		</li>";
-	}
-?>
-</ul>
-</div>
-<div id="wheel"  style="float: left">
-<canvas id="canvas" width="800" height="600"></canvas>
-</div>
-<div id="stats">
-<div id="counter"></div>
-</div>
-
- -->
-
 
  <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
 <div id="blueimp-gallery" class="blueimp-gallery" >
