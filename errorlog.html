@@ -1,4 +1,27 @@
-<p>Error on Jul 21, 2015 10:45AM - Invalid argument supplied for foreach() in /var/www/foodie/app/views/ping.php on line 14</p><h3>Exception information:</h3>
+<h3>Exception information:</h3>
+
+           <p><strong>Date:</strong> Jul 22, 2015 23:25PM</p>
+
+           <p><strong>Message:</strong> SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'rest_address' cannot be null</p>
+
+           <p><strong>Code:</strong> 23000</p>
+
+           <p><strong>File:</strong> /var/www/foodie/app/Helpers/Database.php</p>
+
+           <p><strong>Line:</strong> 127</p>
+
+           <h3>Stack trace:</h3>
+
+           <pre>#0 /var/www/foodie/app/Helpers/Database.php(127): PDOStatement->execute()
+#1 /var/www/foodie/app/Models/Rests.php(76): Helpers\Database->insert('restaurants', Array)
+#2 /var/www/foodie/app/Controllers/Rests.php(70): Models\Rests->add_restaurant(Array)
+#3 /var/www/foodie/app/Core/Router.php(92): Controllers\Rests->index()
+#4 /var/www/foodie/app/Core/Router.php(182): Core\Router::invokeObject('Controllers\Res...')
+#5 /var/www/foodie/index.php(91): Core\Router::dispatch()
+#6 {main}</pre>
+
+           <hr />
+<p>Error on Jul 22, 2015 23:20PM - fopen(rests.json): failed to open stream: Permission denied in /var/www/foodie/app/Controllers/Rests.php on line 29</p><p>Error on Jul 21, 2015 10:45AM - Invalid argument supplied for foreach() in /var/www/foodie/app/views/ping.php on line 14</p><h3>Exception information:</h3>
 
            <p><strong>Date:</strong> Jul 21, 2015 10:29AM</p>
 
