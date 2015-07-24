@@ -61,7 +61,7 @@ $hooks->run('afterBody');
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="<?php echo DIR;?>rests">מסעדות</a></li>
-        <li><a href="<?php echo DIR;?>user/rand_dish">מנה בהפתעה</a></li>
+        <li><a href="<?php echo DIR;?>user/rand_dish"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> מנה בהפתעה</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="">
         <div class="form-group">
@@ -82,14 +82,14 @@ $hooks->run('afterBody');
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $user->user_name;?> 
                <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo DIR;?>user/dishes">מנות מועדפות</a></li>
+            <li><a href="<?php echo DIR;?>user/dishes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> מנות מועדפות</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo DIR;?>logout">התנתק</a></li>
+            <li><a href="<?php echo DIR;?>logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> התנתק</a></li>
           </ul>
         </li>
 <?php
           } else {
-            echo "<li><a href='" . DIR . "login'>התחבר</a></li>";
+            echo "<li><a href='" . DIR . "login'><span class='glyphicon glyphicon-log-in' aria-hidden='true'></span> התחבר</a></li>";
           }
         ?>
       </ul>

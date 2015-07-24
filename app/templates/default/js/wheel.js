@@ -328,7 +328,7 @@
       ctx.rotate((lastAngle + angle) / 2);
 
       ctx.fillStyle = '#000000';
-      ctx.fillText(value.substr(0, 20), size / 2 + 20, 0);
+      ctx.fillText(value.substr(0, 20), size / 2 + 40, 0);
       ctx.restore();
 
       ctx.restore();
