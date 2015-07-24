@@ -75,6 +75,10 @@ Router::any('dishes/parse_all', 'Controllers\Rests@parse_all');
 
 Router::any('search', 'Controllers\Rests@search_post');
 Router::any('ping', 'Controllers\Rests@ping');
+
+Router::any('login', 'Controllers\Auth@login');
+Router::any('logout', 'Controllers\Auth@logout');
+
 Router::any('search/(:any)', 'Controllers\Rests@search');
 Router::any('rests', 'Controllers\Rests@index');
 Router::any('json/search', 'Controllers\Json@search');

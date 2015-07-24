@@ -2,6 +2,7 @@
 
 use Helpers\Assets;
 use Helpers\Url;
+use Helpers\Session;
 use Helpers\Hooks;
 
 //initialise hooks
@@ -67,10 +68,16 @@ $hooks->run('afterBody');
         <button type="submit" class="btn btn-default">חיפוש</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-      	<!-- <li><a href="<?php echo DIR;?>logout">Logout</a></li> -->
+        <?php
+          //handle user login
+          $user = Session::get('user');
+          if ($user->user_name) {
+            echo "<li><a href='" . DIR . "logout'>Logout</a></li>";
+          } else {
+            echo "<li><a href='" . DIR . "login'>Login</a></li>";
+          }
+        ?>
       </ul>
-
-
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
