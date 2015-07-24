@@ -52,7 +52,7 @@ $hooks->run('afterBody');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo DIR;?>admin"><?php echo SITETITLE;?></a>
+      <a class="navbar-brand" href="<?php echo DIR;?>"><?php echo SITETITLE;?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -67,7 +67,7 @@ $hooks->run('afterBody');
         <button type="submit" class="btn btn-default">חיפוש</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="<?php echo DIR;?>admin/logout">Logout</a></li>
+      	<li><a href="<?php echo DIR;?>logout">Logout</a></li>
       </ul>
 
 
