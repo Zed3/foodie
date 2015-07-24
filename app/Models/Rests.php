@@ -76,7 +76,13 @@ FROM
     return $this->db->insert("restaurants",$data);
   }
 
-  public function add_dish($data) {
+  public function update_restaurant($data) {
+    $where = array('rest_id' => $data['rest_id']);
+    return $this->db->update("restaurants",$data, $where);
+
+  }
+
+   function add_dish($data) {
     return $this->db->insert("dishes",$data);
   }
 

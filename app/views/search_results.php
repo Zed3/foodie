@@ -37,8 +37,9 @@ use Core\Language;
       <tbody>
     ";
     foreach($data['results_restaurants'] as $row){
+      $kosher = $row->rest_kosher ? " - כשר" : "";
       echo "<tr>";
-      echo "<td><a href='" . DIR . "rest/$row->rest_id'>$row->rest_name</a></td>";
+      echo "<td><a href='" . DIR . "rest/$row->rest_id'>$row->rest_name " . $kosher . "</a></td>";
       echo "</tr>";
     }
     echo "
@@ -71,7 +72,8 @@ use Core\Language;
       if ($row->dish_image) echo "<a href='$row->dish_image' title='$row->dish_title' data-gallery> <span class='glyphicon glyphicon-camera'> </span</a>";
       echo "</td>";
       echo "<td>$row->dish_price</td>";
-      echo "<td><a href='" . DIR . "rest/$row->rest_id'>$row->rest_name</a></td>";
+      $kosher = $row->rest_kosher ? " - כשר" : "";
+      echo "<td><a href='" . DIR . "rest/$row->rest_id'>$row->rest_name $kosher</a></td>";
       echo "</tr>";
     }
     echo "

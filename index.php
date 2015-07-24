@@ -63,6 +63,10 @@ use Helpers\Hooks;
 //define routes
 Router::any('rest/(:num)', 'Controllers\Rests@rest');
 Router::any('rests/(:num)', 'Controllers\Rests@rest');
+
+Router::any('rests/update/(:num)', 'Controllers\Rests@update_restaurant');
+Router::any('rests/update', 'Controllers\Rests@update_restaurant');
+
 Router::any('rest/(:num)/delivery_report', 'Controllers\Rests@delivery_report');
 Router::any('delivery/(:num)', 'Controllers\Rests@delivery_report');
 

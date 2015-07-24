@@ -46,6 +46,32 @@ class Rests extends Controller {
     return $content;
   }
 
+  public function update_restaurant($existing_rest_id=null) {
+    $data['rests_new'] = $this->fetch_restaurant_info(1);
+
+    //parse data
+    foreach ($data['rests_new'] as $rest) {
+      if ($existing_rest_id && $existing_rest_id <> $rest->RestaurantId) continue;
+      $rest_id = $rest->RestaurantId;
+      $rest_name = $rest->RestaurantName;
+      $rest_address = $rest->RestaurantAddress;
+      $rest_logo = $rest->RestaurantLogoUrl;
+      $rest_exists = $this->_model->get_restaurant($rest_id);
+
+      $rest_data = array(
+        'rest_id' => $rest_id,
+        'rest_name' => $rest_name,
+        'rest_address' => $rest_address,
+        'rest_logo' => $rest_logo,
+        'rest_kosher' => (bool)$rest->IsKosher
+      );
+
+      //update existing row
+      $this->_model->update_restaurant($rest_data);
+    }
+
+  }
+
   public function index()
   {
       $data['title'] = 'מסעדות';
