@@ -67,7 +67,7 @@ $hooks->run('afterBody');
         <button type="submit" class="btn btn-default">חיפוש</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="<?php echo DIR;?>logout">Logout</a></li>
+      	<!-- <li><a href="<?php echo DIR;?>logout">Logout</a></li> -->
       </ul>
 
 

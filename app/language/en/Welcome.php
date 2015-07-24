@@ -3,10 +3,8 @@
 return array(
 
 	// Index method
-	'welcome_text' => 'Welcome',
+	'welcome_text' => 'Foodie',
 	'welcome_message' => '
-		Hello, welcome from the welcome controller! <br/>
-		This content can be changed in <code>/app/views/welcome/welcome.php</code>
 	',
 
 	// Subpage method

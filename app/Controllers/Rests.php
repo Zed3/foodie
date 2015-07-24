@@ -275,7 +275,7 @@ ajax.post = function(url, data, callback, sync) {
 
       //get pending deliveries
       $data['deliveries'] = $this->_model->fetch_today_deliveries();
-
+      $data['welcome_message'] = "";
       //if there are no deliveries for today, add them
       if (empty($data['deliveries'])) {
         $data['restaurants'] = $this->fetch_restaurant_info($force);
