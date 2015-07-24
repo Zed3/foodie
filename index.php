@@ -79,6 +79,9 @@ Router::any('ping', 'Controllers\Rests@ping');
 Router::any('login', 'Controllers\Auth@login');
 Router::any('logout', 'Controllers\Auth@logout');
 
+Router::any('favorite/(:num)/(:num)/(:num)', 'Controllers\Rests@add_favorite');
+Router::any('favorite/(:num)/(:num)', 'Controllers\Rests@add_favorite');
+
 Router::any('search/(:any)', 'Controllers\Rests@search');
 Router::any('rests', 'Controllers\Rests@index');
 Router::any('json/search', 'Controllers\Json@search');

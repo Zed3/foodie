@@ -125,6 +125,11 @@ GROUP BY rest_id
   }
 
   public function add_delivery($data){
-    return $this->db->insert("delivery_times",$data);
+    return $this->db->insert("delivery_times", $data);
   }
+
+  public function add_favorite($data) {
+    return $this->db->insert("favorites", $data);
+  }
+  
 }
