@@ -8,6 +8,7 @@ use Helpers\SimpleCurl as Curl;
 class User extends Controller {
   private $_model;
   private $_user;
+  public $user_id;
 
   public function __construct(){
     parent::__construct();
@@ -21,6 +22,10 @@ class User extends Controller {
     	$this->_user = Session::get('user');
     }
   	return $this->_user;
+  }
+
+  public function current_user_id() {
+    return $this->_user->user_id;
   }
 
   public function dishes() {
@@ -49,6 +54,21 @@ class User extends Controller {
     View::renderTemplate('footer', $data);  
   }
 
+  public function manage_favorite($rest_id, $dish_id=null) {
+    $user_id = $this->_user->user_id;
+    $data = array(
+      'user_id' => $user_id,
+      'rest_id' => $rest_id,
+      'dish_id' => $dish_id
+    );
+
+    if ($this->_model->check_fav($data)) {
+      $this->_model->del_favorite($data);   
+    } else {
+      $this->_model->add_favorite($data);
+    }
+  }
+
   public function add_favorite($rest_id, $dish_id=null) {
     $user_id = $this->_user->user_id;
     $data = array(
@@ -58,5 +78,17 @@ class User extends Controller {
     );
 
     $this->_model->add_favorite($data);    
+  } 
+
+  public function del_favorite($rest_id, $dish_id=null) {
+    $user_id = $this->_user->user_id;
+
+    $data = array(
+      'user_id' => $user_id,
+      'rest_id' => $rest_id,
+      'dish_id' => $dish_id
+    );
+
+    $this->_model->del_favorite($data);    
   } 
 }

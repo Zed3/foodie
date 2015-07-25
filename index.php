@@ -84,8 +84,8 @@ Router::any('logout', 'Controllers\Auth@logout');
 Router::any('user/dishes', 'Controllers\User@dishes');
 Router::any('user/rand_dish', 'Controllers\User@rand_dish');
 
-Router::any('favorite/(:num)/(:num)', 'Controllers\User@add_favorite');
-Router::any('favorite/(:num)', 'Controllers\User@add_favorite');
+Router::any('favorite/(:num)/(:num)', 'Controllers\User@manage_favorite');
+Router::any('favorite/(:num)', 'Controllers\User@manage_favorite');
 
 Router::any('search/(:any)', 'Controllers\Rests@search');
 Router::any('rests', 'Controllers\Rests@index');

@@ -10,6 +10,7 @@ use Core\Language;
 </div>
 <?php
   if ($data['dishes']) {
+    $user_id = $data['user_id'];
     //TODO: fix this datatable
     echo "<table id='rest-dishes1' class='table-hover'>";
       echo "<thead>";
@@ -23,10 +24,10 @@ use Core\Language;
       if ($data['fav_dishes'][$row->rest_id][$row->dish_id] == true) {
         //TODO: make this better, add ajax here
         // mark as fav
-        $fav = '<span class="glyphicon glyphicon-heart heart" aria-hidden="true"></span>';
+        $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להסיר מנה זו מהמועדפים'><span class='glyphicon glyphicon-heart heart' aria-hidden='true'></span></a>";
       } else {
         //show add to favs
-        $fav = '<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>';
+        $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להוסיף מנה זו למועדפים'><span class='glyphicon glyphicon-heart-empty' aria-hidden='true'></span></a>";
       }
 
       echo "<tr class='rest-dish'>";

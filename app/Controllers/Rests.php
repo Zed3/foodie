@@ -116,7 +116,9 @@ class Rests extends Controller {
 
       //load favorites for current user
       $user = new \Controllers\User();
-      $user_id = $user->get_current_user();
+      $user_id = $user->current_user_id();
+
+      $data['user_id'] = $user_id;
       if ($user) {
         $fav_dishes = $user->get_fav_dishes_for_rest($rest_id);
         foreach ($fav_dishes as $dish) {
