@@ -5,7 +5,6 @@
 <div class="page-header">
 	<h1><?php echo $data['title'] ?></h1>
 </div>
-
 <p><?php echo $data['welcome_message'] ?></p>
 <?php echo \Core\Error::display($error); ?>
 <form class="form-horizontal" method="POST">
@@ -36,3 +35,4 @@
     </div>
   </div>
 </form>
+<p><a href="<?php echo DIR;?>register">איך לך חשבון? הירשם כאן</a></p>

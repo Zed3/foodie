@@ -54,6 +54,9 @@ $hooks->run('afterBody');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <a class="navbar-brand" href="/">
+        <img alt="Brand" src="<?php echo Url::templatePath() . 'img/logo.png';?>">
+      </a>
       <a class="navbar-brand" href="<?php echo DIR;?>"><?php echo SITETITLE;?></a>
     </div>
 

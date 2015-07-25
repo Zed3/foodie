@@ -15,8 +15,12 @@ class Auth extends \Core\Model {
   }
 
   public function get_user($username){
-  	$data = $this->db->select("SELECT * FROM users WHERE user_name = :username  LIMIT 1", array(':username' => $username));
-  	return $data[0];
+    $data = $this->db->select("SELECT * FROM users WHERE user_name = :username  LIMIT 1", array(':username' => $username));
+    return $data[0];
+  }
+
+  public function add_user($data){
+    return $this->db->insert("users", $data);
   }
 
 }

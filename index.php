@@ -79,6 +79,7 @@ Router::any('search', 'Controllers\Rests@search_post');
 Router::any('ping', 'Controllers\Rests@ping');
 
 Router::any('login', 'Controllers\Auth@login');
+Router::any('register', 'Controllers\Auth@register');
 Router::any('logout', 'Controllers\Auth@logout');
 
 Router::any('user/dishes', 'Controllers\User@dishes');

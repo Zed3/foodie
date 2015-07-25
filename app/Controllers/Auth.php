@@ -20,7 +20,7 @@ class Auth extends Controller {
   }
 
   public function login(){
-  	$data['title'] = 'Login';
+  	$data['title'] = 'התחברות';
   	if (Session::get('logged')) {
   		Url::redirect();
   	}
@@ -30,9 +30,7 @@ class Auth extends Controller {
   		$password = $_POST['password'];
 
   		if (Password::verify($password, $this->_model->get_user_hash($username)) != 0) {
-			Session::set('logged', true);
-			Session::set('user', $this->_model->get_user($username));
-			Url::redirect();
+        $this->login_user($username);        
   		} else {
   			$error[] = "Wrong username or password";
   		}
@@ -43,4 +41,52 @@ class Auth extends Controller {
 	View::renderTemplate('footer', $data);
   
   }
+
+  public function login_user($username) {
+    Session::set('logged', true);
+    Session::set('user', $this->_model->get_user($username));
+    Url::redirect();    
+  }
+
+  public function register(){
+    if (Session::get('logged')) {
+      Url::redirect();
+    }
+    
+    $data['title'] = 'הרשמה';
+    if(isset($_POST['submit'])){
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $email = $_POST['email'];
+      if($username == ''){
+        $error[] = 'שם משתמש הוא שדה נדרש';
+      }
+
+      if ($this->_model->get_user($username)) {
+        $error[] = 'שם המשתמש תפוס, בעסה';
+      }
+
+      if($password == ''){
+        $error[] = 'צריך סיסמא כדי להירשם, אחרת כל אחד יוכל להיכנס במקומך...';
+      }
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $error[] = 'כדי להירשם צריך מייל, למקרה ששכחת את הסיסמא';
+      }
+      if(!$error){
+        $postdata = array(
+          'user_name' => $username,
+          'user_password' => \helpers\password::make($password),
+          'user_email' => $email
+        );
+        $this->_model->add_user($postdata);
+        $this->login_user($username);
+//        Session::set('message','User Added');
+        Url::redirect();
+      }
+    }
+    View::renderTemplate('header',$data);
+    View::render('register',$data,$error);
+    View::renderTemplate('footer',$data);
+  }
+
 }
