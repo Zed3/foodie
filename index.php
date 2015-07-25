@@ -68,14 +68,14 @@ Router::any('mail/test', 'Controllers\Mail@test');
 
 Router::any('rests/update/(:num)', 'Controllers\Rests@update_restaurant');
 Router::any('rests/update', 'Controllers\Rests@update_restaurant');
-
+Router::any('rests', 'Controllers\Rests@index');
 Router::any('rest/(:num)/delivery_report', 'Controllers\Rests@delivery_report');
+
 Router::any('delivery/(:num)', 'Controllers\Rests@delivery_report');
 
 Router::any('dishes/parse/(:num)', 'Controllers\Rests@parse');
 Router::any('dishes/parse_all', 'Controllers\Rests@parse_all');
 
-Router::any('search', 'Controllers\Rests@search_post');
 Router::any('ping', 'Controllers\Rests@ping');
 
 Router::any('login', 'Controllers\Auth@login');
@@ -88,10 +88,13 @@ Router::any('user/rand_dish', 'Controllers\User@rand_dish');
 Router::any('favorite/(:num)/(:num)', 'Controllers\User@manage_favorite');
 Router::any('favorite/(:num)', 'Controllers\User@manage_favorite');
 
-Router::any('search/(:any)', 'Controllers\Rests@search');
-Router::any('rests', 'Controllers\Rests@index');
+Router::any('search', 'Controllers\Search@search_post');
+Router::any('search/(:any)', 'Controllers\Search@search');
+Router::any('advanced_search', 'Controllers\Search@advanced_search');
+
 Router::any('json/search', 'Controllers\Json@search');
 Router::any('json/all_dishes', 'Controllers\Json@all_dishes');
+
 Router::any('', 'Controllers\Welcome@index');
 
 //module routes
