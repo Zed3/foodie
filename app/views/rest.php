@@ -5,6 +5,7 @@ use Core\Language;
 ?>
 
 <div class="page-header">
+  <img class='img-thumbnail rest_logo' src='<?php echo $data['rest'][0]->rest_logo; ?>' />
   <h1><?php echo $data['title'] ?></h1>
   <p><?php echo $data['rest'][0]->rest_address; ?></p>
 </div>

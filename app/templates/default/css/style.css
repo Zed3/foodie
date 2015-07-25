@@ -19,6 +19,7 @@
     margin-right: 20px;
     text-align: right;
   }
+
   .dish_image {
     width: 200px;
     float: right;
@@ -26,6 +27,12 @@
   .search_dish_image {
     width: 40px;
     height: 20px;
+  }
+
+  .rest_logo {
+    height: 75px;
+    float: right;
+    margin-left: 10px;
   }
 
   .rest_box {
