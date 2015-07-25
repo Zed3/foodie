@@ -4,7 +4,10 @@
     direction: rtl;
   }
   
-  body { padding-top: 70px; }
+  body { 
+    padding-top: 70px; 
+    background-image: url(../img/back.jpg);
+  }
 
   .dish {
      margin: 20px auto;

@@ -17,10 +17,10 @@
   <div class="form-group">
     <label for="price_from" class="col-sm-2 control-label">מחיר</label>
     <div class="col-sm-2">
-      <input class="form-control" id="price_from"  name="price_from" value="<?php if(isset($_REQUEST['price_from'])){ echo $_REQUEST['price_from']; }?>">
+      <input class="form-control" id="price_from" placeholder="מינימום" name="price_from" value="<?php if(isset($_REQUEST['price_from'])){ echo $_REQUEST['price_from']; }?>">
     </div>
     <div class="col-sm-2">
-      <input class="form-control" id="price_to"  name="price_to" value="<?php if(isset($_REQUEST['price_to'])){ echo $_REQUEST['price_to']; }?>">
+      <input class="form-control" id="price_to" placeholder="מקסימום" name="price_to" value="<?php if(isset($_REQUEST['price_to'])){ echo $_REQUEST['price_to']; }?>">
     </div>
   </div>
   <div class="form-group">
