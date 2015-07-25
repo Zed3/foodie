@@ -7,7 +7,7 @@
 </div>
 
 <p><?php echo $data['welcome_message'] ?></p>
-<?php echo \Core\error::display($error); ?>
+<?php echo \Core\Error::display($error); ?>
 <form class="form-horizontal" method="POST">
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">שם משתמש</label>
