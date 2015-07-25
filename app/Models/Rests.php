@@ -11,7 +11,7 @@ class Rests extends \Core\Model {
 
   public function get_restaurants() {
     $query = "
-      SELECT restaurants.*, avg_delivery_time FROM restaurants LEFT JOIN
+      SELECT restaurants.*, REPLACE(rest_logo, 'https', 'http') AS rest_logo, avg_delivery_time FROM restaurants LEFT JOIN
 (SELECT
     rest_id,
     CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,
@@ -46,7 +46,7 @@ FROM
   public function get_restaurant($id) {
 //    return $this->db->select("SELECT * FROM restaurants WHERE rest_id = :id LIMIT 1", array(':id' => $id));
     $query = "
-      SELECT restaurants.*, avg_delivery_time FROM restaurants LEFT JOIN
+      SELECT restaurants.*, REPLACE(rest_logo, 'https', 'http') AS rest_logo, avg_delivery_time FROM restaurants LEFT JOIN
 (SELECT
     rest_id,
     CONCAT(AVG(HOUR(timestamp) * 60 + MINUTE(timestamp)) DIV 60,

@@ -15,13 +15,20 @@ $hooks = Hooks::get();
 Assets::js(array(
 	Url::templatePath() . 'js/jquery.js',
 	'//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js',
-  '//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js',
-  '//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js',
-  'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js',
-  '//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js',
-  Url::templatePath() . 'js/site.js',
-  Url::templatePath() . 'js/wheel.js',
-  Url::templatePath() . 'js/jquery.tinysort.js'
+	'//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js',
+	'//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js',
+	'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js',
+	'//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js',
+
+	Url::templatePath() . 'js/bootstrap.min.js',
+	Url::templatePath() . 'js/jquery.dataTables.min.js',
+	Url::templatePath() . 'js/dataTables.bootstrap.js',
+	Url::templatePath() . 'js/jquery-ui.min.js',
+	Url::templatePath() . 'js/jquery.blueimp-gallery.min.js',
+
+	Url::templatePath() . 'js/site.js',
+	Url::templatePath() . 'js/wheel.js',
+	Url::templatePath() . 'js/jquery.tinysort.js'
 ));
 
 //hook for plugging in javascript

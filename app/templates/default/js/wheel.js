@@ -318,8 +318,11 @@
       //ctx.clip(); // It would be best to clip, but we can double performance without it
       ctx.closePath();
 
-      ctx.fillStyle = colors[key];
-      ctx.fillStyle = (key % 2 === 0) ? '#BD4932' : '#FFFAD5';
+      if (wheel.segments.length % 2 === 0) {        
+        ctx.fillStyle = (key % 2 === 0) ? '#BD4932' : '#FFFAD5';
+      } else {
+        ctx.fillStyle = colors[key];
+      }
       ctx.fill();
       ctx.stroke();
 

@@ -21,13 +21,17 @@ use Core\Language;
       $dish_price = $row->dish_price;
       $dish_title = $row->dish_title;
 
-      if ($data['fav_dishes'][$row->rest_id][$row->dish_id] == true) {
-        //TODO: make this better, add ajax here
-        // mark as fav
-        $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להסיר מנה זו מהמועדפים'><span class='glyphicon glyphicon-heart heart' aria-hidden='true'></span></a>";
+      if ($data['user_id']) {
+        if ($data['fav_dishes'][$row->rest_id][$row->dish_id] == true) {
+          //TODO: make this better, add ajax here
+          // mark as fav
+          $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להסיר מנה זו מהמועדפים'><span class='glyphicon glyphicon-heart heart' aria-hidden='true'></span></a>";
+        } else {
+          //show add to favs
+          $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להוסיף מנה זו למועדפים'><span class='glyphicon glyphicon-heart-empty' aria-hidden='true'></span></a>";
+        }
       } else {
-        //show add to favs
-        $fav = "<a href='#'  onclick='manage_favorite($row->rest_id, $row->dish_id)' title='לחץ כדי להוסיף מנה זו למועדפים'><span class='glyphicon glyphicon-heart-empty' aria-hidden='true'></span></a>";
+        $fav = "<a href='/login' title='לחץ כדי להוסיף מנה זו למועדפים'><span class='glyphicon glyphicon-heart-empty' aria-hidden='true'></span></a>";        
       }
 
       echo "<tr class='rest-dish'>";
