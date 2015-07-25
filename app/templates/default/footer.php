@@ -20,11 +20,11 @@ Assets::js(array(
 	'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js',
 	'//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js',
 
-	Url::templatePath() . 'js/bootstrap.min.js',
-	Url::templatePath() . 'js/jquery.dataTables.min.js',
-	Url::templatePath() . 'js/dataTables.bootstrap.js',
-	Url::templatePath() . 'js/jquery-ui.min.js',
-	Url::templatePath() . 'js/jquery.blueimp-gallery.min.js',
+	// Url::templatePath() . 'js/bootstrap.min.js',
+	// Url::templatePath() . 'js/jquery.dataTables.min.js',
+	// Url::templatePath() . 'js/dataTables.bootstrap.js',
+	// Url::templatePath() . 'js/jquery-ui.min.js',
+	// Url::templatePath() . 'js/jquery.blueimp-gallery.min.js',
 
 	Url::templatePath() . 'js/site.js',
 	Url::templatePath() . 'js/wheel.js',
