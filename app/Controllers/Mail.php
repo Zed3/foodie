@@ -8,6 +8,7 @@ use Helpers\SimpleCurl as Curl;
 class Mail extends Controller {
 
 	function test() {
+		mail('shaishofet@gmail.com', 'test from php', 'test from php');
 	    $mail = new \Helpers\PhpMailer\mail();
 	    $mail->setFrom('noreply@domain.com');
 	    $mail->addAddress('shaishofet@gmail.com');
