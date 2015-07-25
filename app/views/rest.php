@@ -10,6 +10,7 @@ use Core\Language;
 </div>
 <?php
   if ($data['dishes']) {
+    //TODO: fix this datatable
     echo "<table id='rest-dishes1' class='table-hover'>";
       echo "<thead>";
       echo "<tr><th></th><th></th><th></th><th></th></tr>";
