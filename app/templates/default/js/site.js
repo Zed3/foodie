@@ -4,4 +4,8 @@
       source: "/json/search",
       minLength: 2
     });
+
+    $('#rest-dishes').DataTable({
+    	"bPaginate": false
+    });
   });

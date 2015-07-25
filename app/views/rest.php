@@ -10,9 +10,13 @@ use Core\Language;
 </div>
 <?php
   if ($data['dishes']) {
-    echo "<table class='table-hover'>";
+    echo "<table id='rest-dishes1' class='table-hover'>";
+      echo "<thead>";
+      echo "<tr><th></th><th></th><th></th><th></th></tr>";
+      echo "</thead>";
     foreach($data['dishes'] as $row){
       $dish_price = number_format($row->dish_price,2);
+      $dish_price = $row->dish_price;
       $dish_title = $row->dish_title;
 
       if ($data['fav_dishes'][$row->rest_id][$row->dish_id] == true) {
@@ -32,7 +36,10 @@ use Core\Language;
       echo "<td class='price'>$dish_price</td>";
       echo "<td class='fav'>$fav</td>";
 
-      if ($row->dish_image) echo "<td><a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a></td>";
+      echo "<td>";
+      if ($row->dish_image) echo "<a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a>";
+      echo "</td>";
+
       echo "</tr>";
     }
     echo "</table>";
