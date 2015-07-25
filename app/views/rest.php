@@ -10,17 +10,32 @@ use Core\Language;
 </div>
 <?php
   if ($data['dishes']) {
+    echo "<table class='table-hover rest-dish'>";
     foreach($data['dishes'] as $row){
       $dish_price = number_format($row->dish_price,2);
-      echo "<div class='row'>";
-      echo "<div class='col-md-9'>";
-      echo "<h3>$row->dish_title</h3>";
-      echo "<p>$row->dish_desc</p>";
-      echo "<div>$dish_price</div>";
-      echo "</div>";
-      if ($row->dish_image) echo "<a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a>";
-      echo "</div>";
+      $dish_title = $row->dish_title;
+
+      if ($data['fav_dishes'][$row->rest_id][$row->dish_id] == true) {
+        //TODO: make this better, add ajax here
+        // mark as fav
+        $fav = '<span class="glyphicon glyphicon-heart heart" aria-hidden="true"></span>';
+      } else {
+        //show add to favs
+        $fav = '<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>';
+      }
+
+      echo "<tr>";
+      echo "<td class='title-desc'>
+        <h3>$dish_title</h3>
+        <p>$row->dish_desc</p>
+      </td>";
+      echo "<td class='price'>$dish_price</td>";
+      echo "<td class='fav'>$fav</td>";
+
+      if ($row->dish_image) echo "<td><a href='$row->dish_image' title='$row->dish_title' data-gallery><img class='img-thumbnail dish_image' src='$row->dish_image' /></a></td>";
+      echo "</tr>";
     }
+    echo "</table>";
   }
 ?>
 

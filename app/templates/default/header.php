@@ -60,7 +60,7 @@ $hooks->run('afterBody');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="<?php echo DIR;?>rests">מסעדות</a></li>
+        <li><a href="<?php echo DIR;?>rests"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> מסעדות</a></li>
         <li><a href="<?php echo DIR;?>user/rand_dish"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> מנה בהפתעה</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search" action="<?php echo DIR;?>search" method="">

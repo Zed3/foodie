@@ -35,6 +35,11 @@ class User extends Controller {
     View::renderTemplate('footer', $data);  
   }
 
+  public function get_fav_dishes_for_rest($rest_id) {
+    $user_id = $this->_user->user_id;
+    return $this->_model->get_fav_dishes($user_id, $rest_id);
+  }
+
   public function rand_dish() {
     $data['title'] = "מנה בהפתעה";
     $data['random_dishes'] = $this->_model->get_rand_dishes(20);

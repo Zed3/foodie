@@ -114,6 +114,17 @@ class Rests extends Controller {
         $data['dishes'] = $this->_model->get_dishes($rest_id);
       }
 
+      //load favorites for current user
+      $user = new \Controllers\User();
+      $user_id = $user->get_current_user();
+      if ($user) {
+        $fav_dishes = $user->get_fav_dishes_for_rest($rest_id);
+        foreach ($fav_dishes as $dish) {
+          if ($dish->rest_id <> $rest_id) continue;
+          $data['fav_dishes'][$dish->rest_id][$dish->dish_id] = true;
+        }        
+      }
+
       View::renderTemplate('header', $data);
       View::render('rest', $data);
       View::renderTemplate('footer', $data);

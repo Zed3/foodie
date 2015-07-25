@@ -35,3 +35,28 @@
     height: 75px !important;
     margin-left: 10px;
   }
+
+  .rest-dish {
+  }
+
+  .rest-dish .title-desc {
+  }
+
+  .rest-dish .price {
+    text-align: center;
+    vertical-align: center;
+    margin: auto;
+    font-size: 1.7em;
+    width: 10%;
+  }
+
+  .rest-dish .fav {
+    text-align: center;
+    vertical-align: center;
+    font-size: 1.7em;
+    width: 10%;
+  }
+
+  .rest-dish .heart {
+    color: red;
+  }
