@@ -87,11 +87,15 @@ FROM
   }
 
   public function search_dishes($keyword) {
-    return $this->db->select('SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE dish_title LIKE :keyword OR dish_desc LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
+    return $this->db->select('SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE dish_title LIKE :keyword OR dish_desc LIKE :keyword LIMIT 100', array(':keyword' => '%' . $keyword . '%'));
   }
 
   public function search_restaurants($keyword) {
     return $this->db->select('SELECT * FROM restaurants WHERE rest_name LIKE :keyword', array(':keyword' => '%' . $keyword . '%'));
+  }
+
+  public function advanced_search($sql, $params){
+    return $this->db->select($sql, $params);
   }
 
   public function parse_from_tenbis(){

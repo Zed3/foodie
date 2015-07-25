@@ -34,12 +34,50 @@ class Search extends Controller {
   }
 
   public function advanced_search() {
+    $data['title'] = 'חיפוש מתקדם';
+    $data['sub_load'] = 1;
 
-    if (isset($_POST['submit'])) {
+    if (isset($_REQUEST['submit'])) {
+
+      //build up query
+      $query = 'SELECT * FROM dishes JOIN restaurants USING(rest_id) WHERE ';
+      $conds = [];
+      $params = [];
+
+      if ($_REQUEST['dish_title']) {
+        $conds[] = '(dish_title LIKE :dish_title OR dish_desc LIKE :dish_title)';
+        $params[':dish_title'] = '%' . $_REQUEST['dish_title'] . '%';
+      }
+
+      if ($_REQUEST['is_kosher']) {
+        $conds[] = 'rest_kosher = 1';
+      }
+
+      if ($_REQUEST['dish_image']) {
+        $conds[] = 'dish_image <> ""';
+      }
+
+      if ($_REQUEST['price_from']) {
+        $conds[] = 'dish_price >= :price_from';
+        $params[':price_from'] = $_REQUEST['price_from'];
+      }
+
+      if ($_REQUEST['price_to']) {
+        $conds[] = 'dish_price <= :price_to';
+        $params[':price_to'] = $_REQUEST['price_to'];
+      }
+
+      $query .= implode(" AND ", $conds);
+      $query .= " LIMIT 100";
+
+      if ($conds) $data['results_dishes'] = $this->_model->advanced_search($query, $params);
     }
 
     View::renderTemplate('header', $data);
     View::render('search', $data, $error);
+
+    if ($data['results_dishes']) {  View::render('search_results', $data); }
+
     View::renderTemplate('footer', $data);
   }
 }

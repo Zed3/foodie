@@ -3,10 +3,11 @@
 use Core\Language;
 
 ?>
-
+<?php if (!$data['sub_load']) {?>
 <div class="page-header">
   <h1><?php echo $data['title']; ?></h1>
 </div>
+<?php } ?>
 <?php
   $total_results = sizeof($data['results_dishes']) + sizeof($data['results_restaurants']);
 	switch ($total_results) {
@@ -22,7 +23,10 @@ use Core\Language;
 			$string = "נמצאו " . $total_results . " תוצאות";
 
 	}
-	echo "<h3>$string עבור \"" . $data['keyword'] ."\"</h3>";
+
+  if (!$data['sub_load']) $string .= " עבור \"" . $data['keyword'] ."\"";
+
+	echo "<h3>$string</h3>";
   
   //show dishes
   if ($data['results_restaurants']) {
