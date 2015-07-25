@@ -64,6 +64,8 @@ use Helpers\Hooks;
 Router::any('rest/(:num)', 'Controllers\Rests@rest');
 Router::any('rests/(:num)', 'Controllers\Rests@rest');
 
+Router::any('mail/test', 'Controllers\Mail@test');
+
 Router::any('rests/update/(:num)', 'Controllers\Rests@update_restaurant');
 Router::any('rests/update', 'Controllers\Rests@update_restaurant');
 
