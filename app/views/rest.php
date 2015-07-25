@@ -10,7 +10,7 @@ use Core\Language;
 </div>
 <?php
   if ($data['dishes']) {
-    echo "<table class='table-hover rest-dish'>";
+    echo "<table class='table-hover'>";
     foreach($data['dishes'] as $row){
       $dish_price = number_format($row->dish_price,2);
       $dish_title = $row->dish_title;
@@ -24,7 +24,7 @@ use Core\Language;
         $fav = '<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>';
       }
 
-      echo "<tr>";
+      echo "<tr class='rest-dish'>";
       echo "<td class='title-desc'>
         <h3>$dish_title</h3>
         <p>$row->dish_desc</p>

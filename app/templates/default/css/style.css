@@ -32,14 +32,16 @@
   }
 
   .rest_box .img-thumbnail {
-    height: 75px !important;
+    height: 55px !important;
     margin-left: 10px;
   }
 
   .rest-dish {
+    margin-bottom: 20px
   }
 
   .rest-dish .title-desc {
+    padding-right: 30px;
   }
 
   .rest-dish .price {
