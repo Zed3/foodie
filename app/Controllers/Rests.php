@@ -124,7 +124,7 @@ class Rests extends Controller {
         foreach ($fav_dishes as $dish) {
           if ($dish->rest_id <> $rest_id) continue;
           $data['fav_dishes'][$dish->rest_id][$dish->dish_id] = true;
-        }        
+        }
       }
 
       View::renderTemplate('header', $data);
@@ -296,7 +296,7 @@ ajax.post = function(url, data, callback, sync) {
       $data['deliveries'] = $this->_model->fetch_today_deliveries();
       $data['welcome_message'] = "";
       //if there are no deliveries for today, add them
-      if (empty($data['deliveries'])) {
+      if (empty($data['deliveries']) || 1==1) {
         $data['restaurants'] = $this->fetch_restaurant_info($force);
         foreach ($data['restaurants'] as $rest) {
           if (!$rest->PoolSumNumber) continue;
@@ -304,9 +304,12 @@ ajax.post = function(url, data, callback, sync) {
             'rest_id' => intval($rest->RestaurantId),
             'total_delivery' => floatval($rest->PoolSumNumber)
           );
-          $this->_model->add_delivery($row);
+
+          if (!$this->_model->check_delivery($row)) $this->_model->add_delivery($row);
         }
       }
+
+      $data['deliveries'] = $this->_model->fetch_today_deliveries();
 
       foreach ($data['deliveries'] as $rest) {
         $rest->avg_delivery = $this->_model->get_restaurant_avg_delivery_time($rest->rest_id);
@@ -319,9 +322,12 @@ ajax.post = function(url, data, callback, sync) {
   }
 
   public function delivery_report($report_id){
-     $data = array(
+    $user = new \Controllers\User();
+    $user_id = $user->current_user_id();
+
+    $data = array(
       'report_id' => $report_id,
-      'user_id' => 0,
+      'user_id' => $user_id,
       'arrived' => $this->_model->now()
     );
 

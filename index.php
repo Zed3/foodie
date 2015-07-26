@@ -71,6 +71,8 @@ Router::any('rests/update', 'Controllers\Rests@update_restaurant');
 Router::any('rests', 'Controllers\Rests@index');
 Router::any('rest/(:num)/delivery_report', 'Controllers\Rests@delivery_report');
 
+Router::any('delivery_report/(:num)', 'Controllers\Rests@delivery_report');
+
 Router::any('delivery/(:num)', 'Controllers\Rests@delivery_report');
 
 Router::any('dishes/parse/(:num)', 'Controllers\Rests@parse');

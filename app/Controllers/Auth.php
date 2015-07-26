@@ -30,7 +30,7 @@ class Auth extends Controller {
   		$password = $_POST['password'];
 
   		if (Password::verify($password, $this->_model->get_user_hash($username)) != 0) {
-        $this->login_user($username);        
+        $this->login_user($username);
   		} else {
   			$error[] = "Wrong username or password";
   		}
@@ -39,20 +39,20 @@ class Auth extends Controller {
 	View::renderTemplate('header', $data);
 	View::render('login', $data, $error);
 	View::renderTemplate('footer', $data);
-  
+
   }
 
   public function login_user($username) {
     Session::set('logged', true);
     Session::set('user', $this->_model->get_user($username));
-    Url::redirect();    
+    Url::redirect();
   }
 
   public function register(){
     if (Session::get('logged')) {
       Url::redirect();
     }
-    
+
     $data['title'] = 'הרשמה';
     if(isset($_POST['submit'])){
       $username = $_POST['username'];
@@ -75,7 +75,7 @@ class Auth extends Controller {
       if(!$error){
         $postdata = array(
           'user_name' => $username,
-          'user_password' => \helpers\password::make($password),
+          'user_password' => Password::make($password),
           'user_email' => $email
         );
         $this->_model->add_user($postdata);

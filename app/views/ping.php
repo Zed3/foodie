@@ -1,5 +1,7 @@
 <?php
-	use Core\Language;
+	use Core\Language,
+      Helpers\Url;
+
 ?>
 
 <div class="page-header">
@@ -13,7 +15,7 @@
       if ($data['deliveries']) {
         foreach ($data['deliveries'] as $rest) {
         	echo "<div class='row'>";
-          echo "<a class='btn btn-default' href='#' role='button'>";
+          echo "<a class='btn btn-default' href='#' onclick='report_delivery($rest->report_id)' role='button'>";
           echo "<img src='$rest->rest_logo' class='img-thumbnail' alt='$row->rest_name' />";
           echo "<p>";
           echo "$rest->rest_id $rest->rest_name $rest->total_delivery";
@@ -22,7 +24,5 @@
           echo "</a>";
         	echo "</div>";
         }
-      } else {
-        Url::redirect();
       }
 ?>
