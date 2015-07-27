@@ -44,7 +44,7 @@ class Config
         //Set this for emails
         define('GMAIL_UN', 'sendfrom@gmail.com');
         define('GMAIL_PASS', 'smartypants');
-        define('MAIL_TO', 'email@gmail.com');
+        define('GMAIL_MAIL_TO', 'email@gmail.com');
 
         //set prefix for sessions
         define('SESSION_PREFIX', 'smvc_');
