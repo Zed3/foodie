@@ -72,3 +72,12 @@
   .rest-dish .heart {
     color: red;
   }
+
+  .ping-table {
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .ping-table tr:hover {
+    background-color: #d9edf7 !important;
+  }

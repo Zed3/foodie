@@ -13,9 +13,9 @@
 <?php
       //parse data
       if ($data['deliveries']) {
-        echo "<table class='table-hover' >";
+        echo "<table class='table-hover ping-table' ><tbody>";
         foreach ($data['deliveries'] as $rest) {
-          echo "<tr>";
+          echo "<tr onclick='report_delivery($rest->report_id)'>";
 //          echo "<a class='btn btn-default' href='#' onclick='report_delivery($rest->report_id)' role='button'>";
           echo "<td><img src='$rest->rest_logo' class='img-thumbnail' alt='$row->rest_name' /></td>";
           echo "<td><h3>$rest->rest_name</h3></td>";
@@ -26,6 +26,6 @@
 //          echo "</a>";
           echo "</tr>";
         }
-        echo "</table>";
+        echo "</tbody></table>";
       }
 ?>

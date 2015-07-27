@@ -304,7 +304,6 @@ ajax.post = function(url, data, callback, sync) {
             'rest_id' => intval($rest->RestaurantId),
             'total_delivery' => floatval($rest->PoolSumNumber)
           );
-
           if (!$this->_model->check_delivery($row)) $this->_model->add_delivery($row);
         }
       }
