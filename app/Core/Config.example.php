@@ -41,6 +41,11 @@ class Config
         define('DB_PASS', 'password');
         define('PREFIX', 'smvc_');
 
+        //Set this for emails
+        define('GMAIL_UN', 'sendfrom@gmail.com');
+        define('GMAIL_PASS', 'smartypants');
+        define('MAIL_TO', 'email@gmail.com');
+
         //set prefix for sessions
         define('SESSION_PREFIX', 'smvc_');
 
