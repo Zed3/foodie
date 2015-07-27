@@ -28,7 +28,8 @@ class Mail extends Controller {
 	function send_delivery($delivery) {
 		$to      = 'shaishofet@gmail.com';
 		$subject = "[Food] $delivery->rest_name";
-
+print_r($delivery);
+die();
 $message = '<html><body>';
 $message .= "<h3>המשלוח ממסעדת $delivery->rest_name סופק לחברה</h3>";
 $message .= '<p>Send via <a href="http://foodie.zed3.us">Foodie</a></p>';

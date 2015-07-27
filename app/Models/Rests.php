@@ -133,7 +133,8 @@ GROUP BY rest_id
   }
 
   public function get_delivery($report_id){
-    return $this->db->select("SELECT * FROM delivery_times JOIN restaurants USING(rest_id) WHERE report_id = :report_id", array(':report_id' => $report_id));
+    $delivery = $this->db->select("SELECT * FROM delivery_times JOIN restaurants USING(rest_id) WHERE report_id = :report_id", array(':report_id' => $report_id));
+    return $delivery[0];
   }
 
   public function add_delivery($data){
