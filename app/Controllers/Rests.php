@@ -305,9 +305,7 @@ ajax.post = function(url, data, callback, sync) {
             'total_delivery' => floatval($rest->PoolSumNumber)
           );
           if (!$this->_model->check_delivery($row)) {
-            $mail = new \Controllers\Mail();
             $this->_model->add_delivery($row);
-            $mail->test();
           }
         }
       }
@@ -333,7 +331,8 @@ ajax.post = function(url, data, callback, sync) {
       'user_id' => $user_id,
       'arrived' => $this->_model->now()
     );
-
+    $mail = new \Controllers\Mail();
+    $mail->test();
     echo $this->_model->delivery_report($data);
   }
 }
