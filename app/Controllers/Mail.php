@@ -27,8 +27,8 @@ class Mail extends Controller {
 
 	function send_delivery($delivery) {
 		$to      = 'shaishofet@gmail.com';
-		$subject = "המשלוח ממסעדת $delivery->rest_name סופק לחברה";
-		$message = 'hello';
+		$subject = "[Food] המשלוח ממסעדת $delivery->rest_name סופק לחברה";
+		$message = 'Send via <a href="">Foodie</a>';
 		$headers = 'From: foodie@zed3.us' . "\r\n" .
 		    'Reply-To: foodie@zed3.us' . "\r\n" .
 		    'X-Mailer: PHP/' . phpversion();
