@@ -30,7 +30,7 @@ class Mail extends Controller {
 		$message = "<h3>המשלוח ממסעדת $delivery->rest_name סופק לחברה</h3>";
 		$message .= "<hr/>";
 		$message .= "Sent via <a href=''>Foodie</a>";
-	    $mail = new \Helpers\PhpMailer\mail();
+	    $mail = new \Helpers\PhpMailer\Mail();
 //	    $mail->SMTPDebug = 2;                               // Enable verbose debug output
 	    $mail->CharSet = 'UTF-8';
 	    $mail->isSMTP();                                    // Set mailer to use SMTP
