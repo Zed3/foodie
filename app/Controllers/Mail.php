@@ -42,7 +42,7 @@ class Mail extends Controller {
 	    $mail->Port = 465;                                  // TCP port to connect, tls=587, ssl=465
 	    $mail->From = GMAIL_UN;
 
-	    $mail->addAddress(MAIL_TO);
+	    $mail->addAddress(GMAIL_MAIL_TO);
 	    $mail->subject($subject);
 	    $mail->body($message);
 
