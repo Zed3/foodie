@@ -132,6 +132,10 @@ GROUP BY rest_id
     return $this->db->select("SELECT * FROM delivery_times WHERE DATE(timestamp) = DATE(CURRENT_TIMESTAMP) AND rest_id = :rest_id AND total_delivery = :total_delivery", array(':rest_id' => $data['rest_id'], ':total_delivery' => $data['total_delivery']));
   }
 
+  public function get_delivery($report_id){
+    return $this->db->select("SELECT * FROM delivery_times JOIN restaurants USING(rest_id) WHERE report_id = :report_id", array(':report_id' => $report_id));
+  }
+
   public function add_delivery($data){
     return $this->db->insert("delivery_times", $data);
   }

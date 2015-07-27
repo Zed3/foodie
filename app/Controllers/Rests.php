@@ -331,8 +331,12 @@ ajax.post = function(url, data, callback, sync) {
       'user_id' => $user_id,
       'arrived' => $this->_model->now()
     );
-    $mail = new \Controllers\Mail();
-    $mail->test();
-    echo $this->_model->delivery_report($data);
+
+    $delivery = $this->_model->get_delivery($report_id);
+    if ($delivery) {
+      $mail = new \Controllers\Mail();
+      $mail->send_delivery($delivery);
+      echo $this->_model->delivery_report($data);      
+    }
   }
 }

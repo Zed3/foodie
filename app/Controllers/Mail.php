@@ -23,4 +23,40 @@ class Mail extends Controller {
 	    // $mail->body("<h1>Hey</h1><p>I like this <b>Bold</b> Text!</p>");
 	    // var_dump($mail->send());
 	}
+
+
+	function send_delivery($delivery) {
+		$to      = 'shaishofet@gmail.com';
+		$subject = "המשלוח ממסעדת $delivery->rest_name סופק לחברה";
+		$message = 'hello';
+		$headers = 'From: foodie@zed3.us' . "\r\n" .
+		    'Reply-To: foodie@zed3.us' . "\r\n" .
+		    'X-Mailer: PHP/' . phpversion();
+
+		mail($to, $subject, $message, $headers);
+	    // $mail = new \Helpers\PhpMailer\mail();
+	    // $mail->setFrom('foodie@zed3.us');
+	    // $mail->addAddress('shaishofet@gmail.com');
+	    // $mail->subject('Important Email');
+	    // $mail->body("<h1>Hey</h1><p>I like this <b>Bold</b> Text!</p>");
+	    // var_dump($mail->send());
+	}
+
+
+	private function mail() {
+		$to      = 'shaishofet@gmail.com';
+		$subject = 'the subject';
+		$message = 'hello';
+		$headers = 'From: foodie@zed3.us' . "\r\n" .
+		    'Reply-To: foodie@zed3.us' . "\r\n" .
+		    'X-Mailer: PHP/' . phpversion();
+
+		mail($to, $subject, $message, $headers);
+	    // $mail = new \Helpers\PhpMailer\mail();
+	    // $mail->setFrom('foodie@zed3.us');
+	    // $mail->addAddress('shaishofet@gmail.com');
+	    // $mail->subject('Important Email');
+	    // $mail->body("<h1>Hey</h1><p>I like this <b>Bold</b> Text!</p>");
+	    // var_dump($mail->send());
+	}
 }
