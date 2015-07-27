@@ -13,16 +13,19 @@
 <?php
       //parse data
       if ($data['deliveries']) {
+        echo "<table class='table-hover' >";
         foreach ($data['deliveries'] as $rest) {
-        	echo "<div class='row'>";
-          echo "<a class='btn btn-default' href='#' onclick='report_delivery($rest->report_id)' role='button'>";
-          echo "<img src='$rest->rest_logo' class='img-thumbnail' alt='$row->rest_name' />";
-          echo "<p>";
-          echo "$rest->rest_id $rest->rest_name $rest->total_delivery";
-          echo "</p>";
-          if ($rest->avg_delivery) echo "<p>זמן הגעה ממוצע: $rest->avg_delivery</p>";
-          echo "</a>";
-        	echo "</div>";
+          echo "<tr>";
+//          echo "<a class='btn btn-default' href='#' onclick='report_delivery($rest->report_id)' role='button'>";
+          echo "<td><img src='$rest->rest_logo' class='img-thumbnail' alt='$row->rest_name' /></td>";
+          echo "<td><h3>$rest->rest_name</h3></td>";
+          echo "<td><h3>$rest->total_delivery</h3></td>";
+          echo "<td>";
+          if ($rest->avg_delivery) echo "זמן הגעה ממוצע: $rest->avg_delivery";
+          echo "</td>";
+//          echo "</a>";
+          echo "</tr>";
         }
+        echo "</table>";
       }
 ?>
