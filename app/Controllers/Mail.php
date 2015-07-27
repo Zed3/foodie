@@ -35,41 +35,15 @@ class Mail extends Controller {
 		$message .= '<p>Send via <a href="http://foodie.zed3.us">Foodie</a></p>';
 		$message .= '</body></html>';		
 
-// To send HTML mail, the Content-type header must be set
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		// To send HTML mail, the Content-type header must be set
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-// Additional headers
+		// Additional headers
 		$headers .= 'From: foodie@zed3.us' . "\r\n" .
 		    'Reply-To: foodie@zed3.us' . "\r\n" .
 		    'X-Mailer: PHP/' . phpversion();
-
-//		mail($to, $subject, $message, $headers);
-
-$mail = new \Helpers\PhpMailer\mail();
-$mail->IsSMTP(); // enable SMTP
-$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-$mail->SMTPAuth = true; // authentication enabled
-$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-$mail->Host = "smtp.gmail.com";
-$mail->Port = 587; // or 587
-$mail->IsHTML(true);
-$mail->Username = "trusteerfoodie@gmail.com";
-$mail->Password = "thisismygreatpassword";
-$mail->SetFrom("trusteerfoodie@gmail.com");
-$mail->Subject = $subject;
-$mail->Body = "hello";
-$mail->AddAddress("shaishofet@gmail.com");
- if(!$mail->Send())
-    {
-    	echo "Mailer Error: " . $mail->ErrorInfo;
-    }
-    else
-    {
-    	echo "Message has been sent";
-    }
-
-
+		mail($to, $subject, $message, $headers);
 
 	}
 
