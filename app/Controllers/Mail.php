@@ -26,7 +26,7 @@ class Mail extends Controller {
 
 
 	function send_delivery($delivery) {
-		$to      = 'shaishofet@gmail.com';
+		$to      = 'shai@il.ibm.com';
 		$subject = "[Food] $delivery->rest_name";
 
 		$message = '<html><body>';
