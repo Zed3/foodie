@@ -46,3 +46,11 @@ function report_delivery(report_id) {
     timeout: 60000
   });
 }
+
+$(document).ajaxSend(function(event, request, settings) {
+  $('#loading-indicator').show();
+});
+
+$(document).ajaxComplete(function(event, request, settings) {
+  $('#loading-indicator').hide();
+});

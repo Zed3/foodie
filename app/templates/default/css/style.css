@@ -81,3 +81,9 @@
   .ping-table tr:hover {
     background-color: #d9edf7 !important;
   }
+
+  #loading-indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }

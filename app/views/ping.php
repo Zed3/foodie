@@ -9,11 +9,11 @@
 </div>
 
 <p><?php echo $data['welcome_message'] ?></p>
-
+<img src="<?php echo Url::templatePath();?>/img/loading.gif" id="loading-indicator" style="display:none" />
 <?php
       //parse data
       if ($data['deliveries']) {
-        echo "<table class='table-hover ping-table' ><tbody>";
+        echo "<table class='table-hover ping-table'><tbody>";
         foreach ($data['deliveries'] as $rest) {
           echo "<tr onclick='report_delivery($rest->report_id)'>";
 //          echo "<a class='btn btn-default' href='#' onclick='report_delivery($rest->report_id)' role='button'>";

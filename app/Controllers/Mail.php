@@ -29,7 +29,7 @@ class Mail extends Controller {
 		$subject =  "[Foodie] - $delivery->rest_name";
 		$message = "<h3>המשלוח ממסעדת $delivery->rest_name סופק לחברה</h3>";
 		$message .= "<hr/>";
-		$message .= "Sent via <a href=''>Foodie</a>";
+		$message .= "Sent via <a href='" . DIR . "'>Foodie</a>";
 	    $mail = new \Helpers\PhpMailer\Mail();
 //	    $mail->SMTPDebug = 2;                               // Enable verbose debug output
 	    $mail->CharSet = 'UTF-8';
@@ -48,8 +48,8 @@ class Mail extends Controller {
 
 	    $mail->FromName = 'Trusteer Foodie';
 	    $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
-	    $mail->isHTML(false);                                  // Set email format to HTML
-	    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	    $mail->isHTML(true);                                  // Set email format to HTML
+	    $mail->AltBody = strip_tags($message);
 	    if(!$mail->send()) {
 	        echo 'Mailer Error: ' . $mail->ErrorInfo;
 	    }
