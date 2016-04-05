@@ -68,6 +68,7 @@ Router::any('mail/test', 'Controllers\Mail@test');
 
 Router::any('rests/update/(:num)', 'Controllers\Rests@update_restaurant');
 Router::any('rests/update', 'Controllers\Rests@update_restaurant');
+Router::any('rests/update_all', 'Controllers\Rests@update_all');
 Router::any('rests', 'Controllers\Rests@index');
 Router::any('rest/(:num)/delivery_report', 'Controllers\Rests@delivery_report');
 

@@ -71,6 +71,52 @@ class Rests extends Controller {
     }
 
   }
+  public function update_all() {
+    $rests = [];
+
+    //get restaurants from DB
+    $data['rests'] = $this->_model->get_restaurants();
+    if (!empty($data['rests'])) {
+      foreach ($data['rests'] as $rest){
+        $rests[$rest->rest_id] = $rest;
+      }
+    }
+
+    //get restaurants from remote server
+    $data['restaurants'] = $this->fetch_restaurant_info();
+
+
+    //parse data
+    foreach ($data['restaurants'] as $rest) {
+      $rest_id = $rest->RestaurantId;
+      $rest_name = $rest->RestaurantName;
+      $rest_address = $rest->RestaurantAddress;
+      $rest_logo = $rest->RestaurantLogoUrl;
+      $rest_exists = $this->_model->get_restaurant($rest_id);
+      if (empty($rest_name)){
+        continue;
+      }
+
+      $rest_data = array(
+        'rest_id' => $rest_id,
+        'rest_name' => $rest_name,
+        'rest_address' => $rest_address,
+        'rest_logo' => $rest_logo,
+        'rest_kosher' => (bool)$rest->IsKosher
+      );
+
+      if ($rests[$rest_id]) {
+        //restaurant exists, just update
+        print_r("Updating " . $rest_data['rest_name']);
+        $this->_model->update_restaurant($rest_data);
+      } else {
+        //add new rest
+        print_r("Adding " . $rest_data['rest_name']);
+        $this->_model->add_restaurant($rest_data);
+      }
+    }
+
+  }
 
   public function index()
   {
@@ -336,7 +382,7 @@ ajax.post = function(url, data, callback, sync) {
     if ($delivery) {
       $mail = new \Controllers\Mail();
       $mail->send_delivery($delivery);
-      echo $this->_model->delivery_report($data);      
+      echo $this->_model->delivery_report($data);
     }
   }
 }
